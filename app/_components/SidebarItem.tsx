@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SubmenuItem from "./SubmenuItem";
+import SubmenuItem from "@/app/_components/SubmenuItem";
 
 import { ChevronDown, LucideIcon } from "lucide-react";
 

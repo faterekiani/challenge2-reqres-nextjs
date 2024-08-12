@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Logo from "./Logo";
+import Logo from "@/app/_components/Logo";
 import { Folder, LucideIcon, User } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 

@@ -12,3 +12,11 @@ export type TUsers = {
   last_name: string;
   avatar: string;
 };
+
+export type TResorces = {
+  id: number;
+  name: string;
+  year: string;
+  color: string;
+  pantone_value: string;
+};

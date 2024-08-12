@@ -1,7 +1,10 @@
 import { USER_API_URL } from "@/app/_lib/constant";
+import { RESOURCE_API_URL } from "@/app/_lib/constant";
+
+// USER
 
 // All Users
-export async function getAllUsersInfo(pageNumber: number, pageSize: number) {
+export async function getAllUsersInfoApi(pageNumber: number, pageSize: number) {
   const res = await fetch(
     `${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`
   );
@@ -16,7 +19,7 @@ export async function getAllUsersInfo(pageNumber: number, pageSize: number) {
 }
 
 // Single Users
-export async function getSingleUserInfo(userId: number) {
+export async function getSingleUserInfoApi(userId: number) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`);
 
   if (!res.ok) {
@@ -29,7 +32,7 @@ export async function getSingleUserInfo(userId: number) {
 }
 
 // Create User
-export async function createNewUser({
+export async function createNewUserApi({
   name,
   job,
 }: {
@@ -52,7 +55,7 @@ export async function createNewUser({
 }
 
 // Delete Users
-export async function deleteUser(userId: number) {
+export async function deleteUserApi(userId: number) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`, {
     method: "DELETE",
     headers: {
@@ -64,4 +67,34 @@ export async function deleteUser(userId: number) {
   }
 
   return res;
+}
+
+//////////////////////////////////////////////////////////
+// RESOURCE
+
+// Recource List
+export async function getAllResorcesApi(pageNumber: number, pageSize: number) {
+  const res = await fetch(
+    `${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const data = await res.json();
+  return data;
+}
+
+// Single resource
+export async function getSingleResourceInfoApi(resourceId: number) {
+  const res = await fetch(`${RESOURCE_API_URL}/${resourceId}`);
+
+  if (!res.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  const data = await res.json();
+
+  return data;
 }

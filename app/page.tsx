@@ -1,4 +1,4 @@
-import TotalUserBox from "./_components/TotalUserBox";
+import TotalUserBox from "@/app/user/_components/TotalUserBox";
 
 export default function Home() {
   return (

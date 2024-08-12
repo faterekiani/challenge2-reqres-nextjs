@@ -1,4 +1,4 @@
-import CreateNewUser from "@/app/_components/CreateNewUser";
+import CreateNewUser from "@/app/user/new-user/_components/CreateNewUser";
 
 export const metadata = {
   title: "New user",
