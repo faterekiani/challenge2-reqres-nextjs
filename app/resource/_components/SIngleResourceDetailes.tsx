@@ -1,5 +1,6 @@
 "use client";
 
+import Spinner from "@/app/_components/Spinner";
 import { getSingleResourceInfoApi } from "@/app/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,12 +19,15 @@ export default function SIngleResourceDetailes({
     queryFn: () => getSingleResourceInfoApi(resourceId),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   if (isError) return <div>Error: {error.message}</div>;
 
   const { id, name, year, color, pantone_value } = singleResourceData?.data;
-
-  console.log(singleResourceData.data);
 
   return (
     <div className="flex flex-col gap-3 px-6 py-6">

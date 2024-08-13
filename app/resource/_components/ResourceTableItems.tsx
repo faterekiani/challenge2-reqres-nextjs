@@ -1,4 +1,4 @@
-import { TResorces } from "@/app/_lib/types/userTypes";
+import { TResorces } from "@/app/_lib/types/types";
 import Link from "next/link";
 
 export default function ResourceTableItems({
@@ -7,6 +7,7 @@ export default function ResourceTableItems({
   resourceInfos: TResorces;
 }) {
   const { id: resourceId, name, year, color, pantone_value } = resourceInfos;
+
   return (
     <Link href={`/resource/resource-list/${resourceId}`} className="w-full">
       <tr className="flex hover:bg-primary-200 py-2">

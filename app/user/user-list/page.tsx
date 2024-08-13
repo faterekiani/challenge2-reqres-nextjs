@@ -1,12 +1,27 @@
 import Spinner from "@/app/_components/Spinner";
-import UserTable from "@/app/user/_components/UserTable";
 import { Suspense } from "react";
+import UserTable from "../_components/UserTable";
 
+// meatdata
 export const metadata = {
   title: "User list",
 };
 
-export default async function Page() {
+export type searchParamsType = {
+  page: string;
+  size: string;
+};
+
+export default function Page({
+  searchParams,
+}: {
+  searchParams: searchParamsType;
+}) {
+  const pageCount = searchParams?.page || "1";
+  const pageSize = searchParams?.size || "6";
+
+  console.log(pageCount);
+
   return (
     <div>
       <h1 className="mb-6 ml-40 text-secondary text-2xl font-black tracking-tighter uppercase">
@@ -14,7 +29,7 @@ export default async function Page() {
       </h1>
 
       <Suspense fallback={<Spinner />}>
-        <UserTable />
+        <UserTable page={pageCount} size={pageSize} />
       </Suspense>
     </div>
   );

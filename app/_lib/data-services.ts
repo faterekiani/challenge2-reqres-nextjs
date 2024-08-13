@@ -4,7 +4,7 @@ import { RESOURCE_API_URL } from "@/app/_lib/constant";
 // USER
 
 // All Users
-export async function getAllUsersInfoApi(pageNumber: number, pageSize: number) {
+export async function getAllUsersInfoApi(pageNumber: string, pageSize: string) {
   const res = await fetch(
     `${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`
   );

@@ -4,7 +4,9 @@ import { getAllResorcesApi } from "@/app/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import ResourceTableItems from "./ResourceTableItems";
-import { TResorces } from "@/app/_lib/types/userTypes";
+import { TResorces } from "@/app/_lib/types/types";
+import Spinner from "@/app/_components/Spinner";
+import Pagination from "@/app/_components/Pagination";
 
 export default function ResourceTable() {
   const [pageNumber, setPageNumber] = useState(2);
@@ -20,8 +22,13 @@ export default function ResourceTable() {
     queryFn: () => getAllResorcesApi(pageNumber, pageSize),
   });
 
-  if (isLoading) return <div>is Loading...</div>;
-  if (isError) return <div>Error...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+  if (isError) return <div>Error : {error.message}</div>;
 
   return (
     <div className="overflow-auto">

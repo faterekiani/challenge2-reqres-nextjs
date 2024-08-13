@@ -1,22 +1,43 @@
 "use client";
 
-import { getAllUsersInfoApi } from "@/app/_lib/data-services";
-import { TUsers } from "@/app/_lib/types/types";
-import { useState } from "react";
-import UserTableItems from "@/app/user/_components/UserTableItems";
 import { useQuery } from "@tanstack/react-query";
 
-export default function UserTable() {
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+import UserTableItems from "@/app/user/_components/UserTableItems";
+import Pagination from "@/app/_components/Pagination";
+import Spinner from "@/app/_components/Spinner";
 
-  const { isLoading, isError, error, data } = useQuery({
-    queryKey: ["users", pageNumber, pageSize],
-    queryFn: () => getAllUsersInfoApi(pageNumber, pageSize),
+import { getAllUsersInfoApi } from "@/app/_lib/data-services";
+import { TUsers } from "@/app/_lib/types/types";
+import { searchParamsType } from "../user-list/page";
+import { useRouter } from "next/navigation";
+
+export default function UserTable({ page, size }: searchParamsType) {
+  const router = useRouter();
+  // fetch all users
+  const {
+    isLoading,
+    isError,
+    error,
+    data: userData,
+  } = useQuery({
+    queryKey: ["users", page, size],
+    queryFn: () => getAllUsersInfoApi(page, size),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
   if (isError) return <div>Error: {error.message}</div>;
+
+  const allUserArray = userData.data;
+  const totalCount = userData.total;
+
+  const handlePageChange = (newPage: number) => {
+    router.push(`?page=${newPage}`);
+  };
 
   return (
     <div className="overflow-auto">
@@ -40,11 +61,24 @@ export default function UserTable() {
           </tr>
         </thead>
         <tbody>
-          {data?.data?.map((userInfo: TUsers) => (
-            <UserTableItems key={userInfo.id} userInfo={userInfo} />
+          {allUserArray?.map((userInfo: TUsers) => (
+            <UserTableItems
+              key={userInfo.id}
+              userInfo={userInfo}
+              allUserArray={allUserArray}
+            />
           ))}
         </tbody>
       </table>
+      <Pagination
+        totalCount={totalCount}
+        page={page}
+        size={size}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }
+
+// const [pageNumber, setPageNumber] = useState(1);
+// const [pageSize, setPageSize] = useState(6);

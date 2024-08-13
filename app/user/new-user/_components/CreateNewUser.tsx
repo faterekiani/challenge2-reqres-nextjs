@@ -15,7 +15,7 @@ export default function CreateNewUser() {
   const { mutate } = useMutation({
     mutationFn: createNewUserApi,
     onSuccess: () => {
-      alert("user successfully deleted");
+      alert("user successfully created");
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
@@ -24,6 +24,11 @@ export default function CreateNewUser() {
     onError: (err) => alert(err.message),
   });
 
+  function handleSubmitCreateUserForm(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    mutate({ name, job });
+  }
+
   return (
     <div className="flex items-center justify-center  bg-primary-100">
       <div
@@ -31,7 +36,7 @@ export default function CreateNewUser() {
      w-96"
       >
         <h2 className="text-2xl font-bold mb-8 text-secondary">Create User</h2>
-        <form onSubmit={() => mutate({ name, job })}>
+        <form onSubmit={handleSubmitCreateUserForm}>
           <div className="mb-4">
             <label
               htmlFor="name"
