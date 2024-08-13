@@ -1,15 +1,11 @@
 import Spinner from "@/app/_components/Spinner";
 import { Suspense } from "react";
 import UserTable from "../_components/UserTable";
+import { searchParamsType } from "@/app/_lib/types/types";
 
 // meatdata
 export const metadata = {
   title: "User list",
-};
-
-export type searchParamsType = {
-  page: string;
-  size: string;
 };
 
 export default function Page({
@@ -19,8 +15,6 @@ export default function Page({
 }) {
   const pageCount = searchParams?.page || "1";
   const pageSize = searchParams?.size || "6";
-
-  console.log(pageCount);
 
   return (
     <div>

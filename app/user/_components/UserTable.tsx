@@ -7,12 +7,13 @@ import Pagination from "@/app/_components/Pagination";
 import Spinner from "@/app/_components/Spinner";
 
 import { getAllUsersInfoApi } from "@/app/_lib/data-services";
-import { TUsers } from "@/app/_lib/types/types";
-import { searchParamsType } from "../user-list/page";
+import { TUsers, searchParamsType } from "@/app/_lib/types/types";
+import { useUsers } from "../hooks/useUser";
 import { useRouter } from "next/navigation";
 
 export default function UserTable({ page, size }: searchParamsType) {
   const router = useRouter();
+
   // fetch all users
   const {
     isLoading,
@@ -24,13 +25,14 @@ export default function UserTable({ page, size }: searchParamsType) {
     queryFn: () => getAllUsersInfoApi(page, size),
   });
 
+  // const { isLoading, userData } = useUsers({ page, size });
+
   if (isLoading)
     return (
       <div>
         <Spinner />
       </div>
     );
-  if (isError) return <div>Error: {error.message}</div>;
 
   const allUserArray = userData.data;
   const totalCount = userData.total;
@@ -79,6 +81,3 @@ export default function UserTable({ page, size }: searchParamsType) {
     </div>
   );
 }
-
-// const [pageNumber, setPageNumber] = useState(1);
-// const [pageSize, setPageSize] = useState(6);

@@ -5,6 +5,7 @@ import Header from "@/app/_components/Header";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 import Provider from "@/app/_lib/provider";
+import ToastProvider from "./_components/Toast";
 
 // FONT
 const jakarta = Plus_Jakarta_Sans({
@@ -34,7 +35,9 @@ export default function RootLayout({
           <div className="flex flex-col w-full h-full ml-64 overflow-auto">
             <Header />
             <div className="p-8">
-              <Provider>{children}</Provider>
+              <Provider>
+                <ToastProvider>{children}</ToastProvider>
+              </Provider>
             </div>
           </div>
         </div>

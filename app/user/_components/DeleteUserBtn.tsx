@@ -1,7 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUserApi } from "@/app/_lib/data-services";
 import { Trash2 } from "lucide-react";
 import { TUsers } from "@/app/_lib/types/types";
+
+import useDeleteUser from "../hooks/useDeleteUser";
+import { useState } from "react";
 
 export default function DeleteUserBtn({
   userId,
@@ -10,26 +11,14 @@ export default function DeleteUserBtn({
   userId: number;
   allUserArray: TUsers[];
 }) {
-  const queryClient = useQueryClient();
+  const [updatedUser, setUpdaterdUser] = useState(allUserArray);
 
-  const { mutate } = useMutation({
-    mutationFn: deleteUserApi,
-    onSuccess: () => {
-      alert("user successfully deleted");
-
-      queryClient.invalidateQueries({
-        queryKey: ["users"],
-      });
-    },
-    onError: (err) => alert(err.message),
-  });
-
-  // allUserArray.filter((item) => item.id === userId);
+  const { deleteUserMutate } = useDeleteUser();
 
   return (
     <button
       className="hover:text-red-600 transition-all"
-      onClick={() => mutate(userId)}
+      onClick={() => deleteUserMutate(userId)}
     >
       <Trash2 size={15} />
     </button>

@@ -16,8 +16,6 @@ function Pagination({
   size,
   onPageChange,
 }: TPaginationProps) {
-  console.log("page:", page);
-
   const currentPage = Number(page);
   const currentSize = Number(size);
   const pageSize = Number(size);

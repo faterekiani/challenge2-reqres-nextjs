@@ -46,7 +46,7 @@ export default function EditUserForm() {
             type="submit"
             className="bg-primary-950 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
           >
-            Create user
+            Edit user
           </button>
         </form>
       </div>

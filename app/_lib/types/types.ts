@@ -20,3 +20,8 @@ export type TResorces = {
   color: string;
   pantone_value: string;
 };
+
+export type searchParamsType = {
+  page: string;
+  size: string;
+};
