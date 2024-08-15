@@ -16,7 +16,5 @@ export async function generateMetadata({
 export default function Page({ params }: { params: TUserPageParams }) {
   const { userId } = params;
 
-  // if (!data || !data.data) return <div>No user data found</div>;
-
   return <SingleUserDetailes userId={userId} />;
 }

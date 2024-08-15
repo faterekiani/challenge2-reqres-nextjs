@@ -15,7 +15,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   title: {
     template: "%s | reqRes",
-    default: "Welcome | reqRes",
+    default: "Authentication | reqRes",
   },
   description: "admin-panel",
 };
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={jakarta.className}>
-        <div className=" bg-pink-500">
+        <div>
           <Provider>
             <ToastProvider>{children}</ToastProvider>
           </Provider>

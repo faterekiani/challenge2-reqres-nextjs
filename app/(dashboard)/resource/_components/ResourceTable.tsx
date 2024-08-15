@@ -1,24 +1,29 @@
 "use client";
 
-import { getAllResorcesApi } from "@/app/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import ResourceTableItems from "./ResourceTableItems";
-import { TResorces } from "@/app/_lib/types/types";
-import Spinner from "../../_components/Spinner";
 
-export default function ResourceTable() {
-  const [pageNumber, setPageNumber] = useState(2);
-  const [pageSize, setPageSize] = useState(6);
+import Spinner from "../../_components/Spinner";
+import ResourceTableItems from "./ResourceTableItems";
+
+import { getAllResorcesApi } from "@/app/_lib/data-services";
+import { SearchParamsType, TResorces } from "@/app/_lib/types/types";
+import { useRouter } from "next/navigation";
+import Pagination from "../../_components/Pagination";
+import { useUsers } from "../../user/hooks/useUser";
+
+export default function ResourceTable({ page, size }: SearchParamsType) {
+  const router = useRouter();
+
+  const totalUserCount = 12;
 
   const {
     data: resourceData,
     isLoading,
     error,
-    isError,
   } = useQuery({
-    queryKey: ["resource", pageNumber, pageSize],
-    queryFn: () => getAllResorcesApi(pageNumber, pageSize),
+    queryKey: ["resource", page, size],
+    queryFn: () => getAllResorcesApi(page, size),
   });
 
   if (isLoading)
@@ -27,7 +32,10 @@ export default function ResourceTable() {
         <Spinner />
       </div>
     );
-  if (isError) return <div>Error : {error.message}</div>;
+
+  const handlePageChange = (newPage: string) => {
+    router.push(`?page=${newPage}`);
+  };
 
   return (
     <div className="overflow-auto">
@@ -52,6 +60,12 @@ export default function ResourceTable() {
           ))}
         </tbody>
       </table>
+      <Pagination
+        page={page}
+        size={size}
+        totalUserCount={totalUserCount}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

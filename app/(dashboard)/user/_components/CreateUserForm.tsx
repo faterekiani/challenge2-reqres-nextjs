@@ -1,21 +1,33 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { createNewUserApi } from "@/app/_lib/data-services";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { showToast } from "@/app/(dashboard)/_components/Toast";
+import { TUsers } from "@/app/_lib/types/types";
 
-export default function CreateNewUser() {
+export default function CreateUserForm({
+  allUserArray,
+  onSetAllUserArray,
+  onClose,
+}: {
+  allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
+  onClose: () => void;
+}) {
   const [name, setUserName] = useState("");
   const [job, setJob] = useState("");
 
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { mutate } = useMutation({
+  // fetch data
+  const { mutate: createUserMutate, isSuccess } = useMutation({
     mutationFn: createNewUserApi,
-    onSuccess: () => {
-      alert("user successfully created");
+    onSuccess: (data: TUsers) => {
+      onSetAllUserArray((user) => [...user, data]);
+      showToast("success", "user successfully created");
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
@@ -26,7 +38,8 @@ export default function CreateNewUser() {
 
   function handleSubmitCreateUserForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    mutate({ name, job });
+    createUserMutate({ name, job });
+    onClose();
   }
 
   return (
@@ -48,7 +61,7 @@ export default function CreateNewUser() {
             <input
               value={name}
               onChange={(e) => setUserName(e.target.value)}
-              id="name"
+              name="name"
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
             />
           </div>
@@ -62,7 +75,7 @@ export default function CreateNewUser() {
             <input
               value={job}
               onChange={(e) => setJob(e.target.value)}
-              id="job"
+              name="job"
               className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
             />
           </div>

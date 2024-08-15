@@ -1,11 +1,29 @@
 "use client";
 
-import { Pencil } from "lucide-react";
 import { useState } from "react";
-import EditUserForm from "../user-list/[userId]/_components/EditUserForm";
+import { Pencil } from "lucide-react";
 
-export default function EditUserBtn() {
+import EditUserForm from "../user-list/[userId]/_components/EditUserForm";
+import Modal from "../../_components/Modal";
+
+export type TUpdateUserBody = {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+};
+
+export default function EditUserBtn({ userId }: { userId: number }) {
   const [showEditForm, setShowEditForm] = useState(false);
+
+  // const { updateUserMutate } = useEditUser();
+
+  // function handleEditUser(userId: number, updatedUserData: TUpdateUserBody) {
+  //   setShowEditForm(!showEditForm);
+  //   updateUserMutate({ id, ...updatedUserData });
+  // }
+
   return (
     <>
       <button
@@ -14,7 +32,11 @@ export default function EditUserBtn() {
       >
         <Pencil size={15} />
       </button>
-      <div>{showEditForm && <EditUserForm />}</div>
+      {showEditForm && (
+        <Modal isOpen={showEditForm} onClose={() => setShowEditForm(false)}>
+          <EditUserForm />
+        </Modal>
+      )}
     </>
   );
 }

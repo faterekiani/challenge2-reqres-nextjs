@@ -6,6 +6,7 @@ import { getSingleUserInfoApi } from "@/app/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 import EditUserBtn from "../../../_components/EditUserBtn";
 import DeleteUserBtn from "../../../_components/DeleteUserBtn";
+import Spinner from "@/app/(dashboard)/_components/Spinner";
 
 export default function SingleUserDetailes({ userId }: { userId: number }) {
   const { data, isError, error, isLoading } = useQuery({
@@ -13,7 +14,13 @@ export default function SingleUserDetailes({ userId }: { userId: number }) {
     queryFn: () => getSingleUserInfoApi(userId),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <Spinner />
+      </div>
+    );
+
   if (isError) return <div>Error: {error.message}</div>;
 
   const { id, avatar, last_name, first_name, email } = data?.data;

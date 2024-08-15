@@ -1,17 +1,17 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 type TPaginationProps = {
   page: string;
   size: string;
-  totalCount: number;
-  onPageChange: (newPage: number) => void;
+  totalUserCount: number;
+  onPageChange: (newPage: string) => void;
 };
 
 function Pagination({
-  totalCount,
+  totalUserCount,
   page,
   size,
   onPageChange,
@@ -19,9 +19,9 @@ function Pagination({
   const currentPage = Number(page);
   const currentSize = Number(size);
   const pageSize = Number(size);
-  const totalPages = Math.ceil(totalCount / pageSize);
+  const totalPages = Math.ceil(totalUserCount / pageSize);
 
-  const [inputSize, setInputSize] = useState(pageSize);
+  // const test = useSearchParams().get("page");
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -32,13 +32,6 @@ function Pagination({
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
-    }
-  };
-
-  const handleSizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newSize = Number(e.target.value);
-    if (newSize > 0) {
-      setInputSize(newSize);
     }
   };
 
@@ -54,12 +47,6 @@ function Pagination({
       >
         <ChevronLeft />
       </button>
-      {/* <input
-        type="number"
-        value={inputSize}
-        onChange={handleSizeChange}
-        className="border rounded p-2"
-      /> */}
       <button
         disabled={currentPage === totalPages}
         onClick={handleNextPage}
@@ -67,7 +54,6 @@ function Pagination({
       >
         <ChevronRight />
       </button>
-       
     </div>
   );
 }

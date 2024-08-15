@@ -21,7 +21,12 @@ export type TResorces = {
   pantone_value: string;
 };
 
-export type searchParamsType = {
+export type SearchParamsType = {
   page: string;
   size: string;
+};
+
+export type TNewUser = {
+  name: string;
+  job: string;
 };

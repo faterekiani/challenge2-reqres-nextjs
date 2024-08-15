@@ -40,7 +40,7 @@ export default function SidebarItem({ item }: { item: SidebarItem }) {
 
   return (
     <>
-      <div
+      <li
         className={`flex items-center justify-between w-full py-3 px-5  hover:bg-primary-100 hover:text-primary-950 transition-colors hover:border-l-4 hover:border-primary-950 ${
           isActive &&
           "bg-primary-100 text-primary-950 transition-colors border-l-4 border-primary-950"
@@ -62,7 +62,7 @@ export default function SidebarItem({ item }: { item: SidebarItem }) {
             }
           />
         )}
-      </div>
+      </li>
 
       {expanded && (
         <div className="flex flex-col ml-10 space-y-3 mt">

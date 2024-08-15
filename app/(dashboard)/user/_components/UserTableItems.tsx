@@ -4,13 +4,17 @@ import Image from "next/image";
 import DeleteUserBtn from "./DeleteUserBtn";
 import { Ellipsis } from "lucide-react";
 import EditUserBtn from "./EditUserBtn";
+import { Dispatch, SetStateAction, useState } from "react";
+import Modal from "../../_components/Modal";
 
 export default function UserTableItems({
   userInfo,
   allUserArray,
+  onSetAllUserArray,
 }: {
   userInfo: TUsers;
   allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
 }) {
   const { id: userId, avatar, first_name, last_name, email } = userInfo;
 
@@ -46,8 +50,12 @@ export default function UserTableItems({
       </td>
 
       <td className="flex items-center justify-center gap-1 w-[20%] text-sm text-gray-500 whitespace-nowrap">
-        <EditUserBtn />
-        <DeleteUserBtn userId={userId} allUserArray={allUserArray} />
+        <EditUserBtn userId={userId} />
+        <DeleteUserBtn
+          userId={userId}
+          allUserArray={allUserArray}
+          onSetAllUserArray={onSetAllUserArray}
+        />
 
         <Link href={`/user/user-list/${userInfo.id}`}>
           <Ellipsis

@@ -1,19 +1,35 @@
 import { Trash2 } from "lucide-react";
 import { TUsers } from "@/app/_lib/types/types";
 
-import useDeleteUser from "../hooks/useDeleteUser";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteUserApi } from "@/app/_lib/data-services";
+import { showToast } from "../../_components/Toast";
+import { Dispatch, SetStateAction } from "react";
 
 export default function DeleteUserBtn({
   userId,
   allUserArray,
+  onSetAllUserArray,
 }: {
   userId: number;
   allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
 }) {
-  const [updatedUser, setUpdaterdUser] = useState(allUserArray);
+  const queryClient = useQueryClient();
 
-  const { deleteUserMutate } = useDeleteUser();
+  const { mutate: deleteUserMutate } = useMutation({
+    mutationFn: deleteUserApi,
+    onSuccess: () => {
+      onSetAllUserArray(
+        allUserArray.filter((user: TUsers) => user.id !== userId)
+      );
+      showToast("success", "user successfully deleted");
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+      });
+    },
+    onError: (err) => showToast("error", err.message),
+  });
 
   return (
     <button

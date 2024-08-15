@@ -1,30 +1,25 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-
-import { getAllUsersInfoApi } from "@/app/_lib/data-services";
-import { TUsers, searchParamsType } from "@/app/_lib/types/types";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { SearchParamsType, TUsers } from "@/app/_lib/types/types";
+
+import { useUsers } from "../hooks/useUser";
 import Spinner from "../../_components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
-// import { useUsers } from "../hooks/useUser";
+import CreateUserBtn from "./CreateUserBtn";
 
-export default function UserTable({ page, size }: searchParamsType) {
+export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();
 
-  // fetch all users
-  const {
-    isLoading,
-    isError,
-    error,
-    data: userData,
-  } = useQuery({
-    queryKey: ["users", page, size],
-    queryFn: () => getAllUsersInfoApi(page, size),
-  });
+  const { isLoading, userData } = useUsers(page, size);
 
-  // const { isLoading, userData } = useUsers({ page, size });
+  const [allDataArray, setAllDataArray] = useState<TUsers[]>([]);
+
+  useEffect(() => {
+    if (userData) setAllDataArray(userData?.data);
+  }, [userData]);
 
   if (isLoading)
     return (
@@ -33,15 +28,26 @@ export default function UserTable({ page, size }: searchParamsType) {
       </div>
     );
 
-  const allUserArray = userData.data;
-  const totalCount = userData.total;
+  const totalUserCount = userData.total;
 
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = (newPage: string) => {
     router.push(`?page=${newPage}`);
   };
 
   return (
     <div className="overflow-auto">
+      <div className="flex items-center justify-between">
+        <h1 className="ml-40 text-secondary text-2xl font-black tracking-tight uppercase">
+          List Of <span className="text-primary-950">users</span>
+        </h1>
+        <div className="flex justify-end mr-40 pb-3">
+          <CreateUserBtn
+            allUserArray={allDataArray}
+            onSetAllUserArray={setAllDataArray}
+          />
+        </div>
+      </div>
+
       <table className="w-[900px] mx-auto bg-white">
         <thead className="bg-primary-950 text-white">
           <tr className="flex justify-between py-4">
@@ -62,17 +68,19 @@ export default function UserTable({ page, size }: searchParamsType) {
           </tr>
         </thead>
         <tbody>
-          {allUserArray?.map((userInfo: TUsers) => (
+          {allDataArray?.map((userInfo: TUsers) => (
             <UserTableItems
               key={userInfo.id}
               userInfo={userInfo}
-              allUserArray={allUserArray}
+              allUserArray={allDataArray}
+              onSetAllUserArray={setAllDataArray}
             />
           ))}
         </tbody>
       </table>
+
       <Pagination
-        totalCount={totalCount}
+        totalUserCount={totalUserCount}
         page={page}
         size={size}
         onPageChange={handlePageChange}

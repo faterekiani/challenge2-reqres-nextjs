@@ -69,6 +69,27 @@ export async function deleteUserApi(userId: number) {
   return res;
 }
 
+// Update User
+export async function updateUserApi(userId: number) {
+  const res = await fetch(`${USER_API_URL}/users/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "morpheus",
+      email: "zion resident",
+    }),
+  });
+
+  if (!res.ok) {
+    throw new Error("Error updating user");
+  }
+
+  const data = await res.json();
+  return data;
+}
+
 //////////////////////////////////////////////////////////
 // RESOURCE
 

@@ -1,4 +1,4 @@
-import SIngleResourceDetailes from "../../_components/SIngleResourceDetailes";
+import SingleResourceDetailes from "../../_components/SingleResourceDetailes";
 
 type TResourcePageParams = {
   resourceId: number;
@@ -16,7 +16,7 @@ export default function Page({ params }: { params: TResourcePageParams }) {
 
   return (
     <div>
-      <SIngleResourceDetailes resourceId={resourceId} />
+      <SingleResourceDetailes resourceId={resourceId} />
     </div>
   );
 }

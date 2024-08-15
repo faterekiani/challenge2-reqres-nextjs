@@ -4,7 +4,7 @@ import { getSingleResourceInfoApi } from "@/app/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../_components/Spinner";
 
-export default function SIngleResourceDetailes({
+export default function SingleResourceDetailes({
   resourceId,
 }: {
   resourceId: number;
