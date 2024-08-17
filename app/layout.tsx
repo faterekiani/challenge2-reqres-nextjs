@@ -1,4 +1,4 @@
-import "@/app/(dashboard)/_styles/globals.css";
+import "@/app/globals.css";
 
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Provider from "./_lib/provider";
