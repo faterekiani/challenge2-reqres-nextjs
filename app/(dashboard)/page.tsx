@@ -1,10 +1,9 @@
-import TotalUserBox from "./user/_components/TotalUserBox";
+import TotalStats from "./_components/TotalStats";
 
 export default function Home() {
   return (
-    <main className="flex gap-8">
-      <TotalUserBox />
-      <TotalUserBox />
+    <main>
+      <TotalStats />
     </main>
   );
 }

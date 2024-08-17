@@ -1,11 +1,11 @@
 import { TResorces } from "@/app/_lib/types/types";
 import Link from "next/link";
 
-export default function ResourceTableItems({
-  resourceInfos,
-}: {
+type Props = {
   resourceInfos: TResorces;
-}) {
+};
+
+export default function ResourceTableItems({ resourceInfos }: Props) {
   const { id: resourceId, name, year, color, pantone_value } = resourceInfos;
 
   return (
@@ -24,12 +24,12 @@ export default function ResourceTableItems({
         <td
           className={`flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap`}
         >
-          <span className={`bg-[${color}] text-white p-1 w-[85px]`}>
+          <span className={`bg-[${color}] text-gray-500 p-1 w-[85px]`}>
             {color}
           </span>
         </td>
 
-        <td className="flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap">
+        <td className="flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap ">
           {pantone_value}
         </td>
       </tr>

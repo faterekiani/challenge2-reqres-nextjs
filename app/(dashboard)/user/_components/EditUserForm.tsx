@@ -1,44 +1,56 @@
-"use client";
-
+import { showToast } from "@/app/(dashboard)/_components/Toast";
+import { updateUserApi } from "@/app/_lib/data-services";
+import { TUsers } from "@/app/_lib/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { createNewUserApi } from "@/app/_lib/data-services";
-import { Dispatch, SetStateAction, useState } from "react";
-import { showToast } from "@/app/(dashboard)/_components/Toast";
-import { TUsers } from "@/app/_lib/types/types";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useSingleUSer } from "../hooks/useSingleUser";
 
 type Props = {
+  userId: number;
   allUserArray: TUsers[];
   onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
+
   onClose: () => void;
 };
-export default function CreateUserForm({
+export default function EditUserForm({
+  userId,
+  onClose,
   allUserArray,
   onSetAllUserArray,
-  onClose,
 }: Props) {
-  const [name, setUserName] = useState("");
+  const [editUserName, setEditUserName] = useState("");
+  const [editUserJob, setEditUserJob] = useState("");
   const [lastName, setLastName] = useState("");
   const [newEmail, setNewEmail] = useState("");
-  const [job, setJob] = useState("");
 
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  // fetch data
-  const { mutate: createUserMutate } = useMutation({
-    mutationFn: createNewUserApi,
-    onSuccess: (data: TUsers) => {
-      onSetAllUserArray((user) => [
-        {
-          ...data,
-          first_name: name,
-          last_name: lastName,
-          email: newEmail,
-        },
-        ...user,
-      ]);
-      showToast("success", "user successfully created");
+  // SINGLE USER
+  const { singleUserData, isLoading, error } = useSingleUSer(userId);
+
+  // EDIT
+  const { mutate: EditUserMutate } = useMutation({
+    mutationFn: updateUserApi,
+    onSuccess: (data) => {
+      const updatedUserIndex = allUserArray.findIndex(
+        (user) => user.id === userId
+      );
+      if (updatedUserIndex !== -1) {
+        onSetAllUserArray([
+          ...allUserArray.slice(0, updatedUserIndex),
+          {
+            ...data,
+            first_name: editUserName,
+            last_name: lastName,
+            email: newEmail,
+          },
+          ...allUserArray.slice(updatedUserIndex + 1),
+        ]);
+      }
+
+      showToast("success", "user successfully Updated");
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
@@ -47,9 +59,17 @@ export default function CreateUserForm({
     onError: (err) => showToast("error", err.message),
   });
 
-  function handleSubmitCreateUserForm(e: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    if (singleUserData && !isLoading && !error) {
+      setEditUserName(singleUserData.name);
+      setEditUserJob(singleUserData.job);
+    }
+  }, [singleUserData, isLoading, error]);
+
+  function handleSubmitEditUserForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    createUserMutate({ job, name });
+
+    EditUserMutate({ userId, name: editUserName, job: editUserJob });
     onClose();
   }
 
@@ -57,21 +77,21 @@ export default function CreateUserForm({
     <div className="flex items-center justify-center  bg-primary-100">
       <div
         className="bg-white p-8 rounded-lg shadow-md
-     w-96"
+       w-96"
       >
-        <h2 className="text-2xl font-bold mb-8 text-secondary">Create User</h2>
-        <form onSubmit={handleSubmitCreateUserForm}>
+        <h2 className="text-2xl font-bold mb-8 text-secondary">Edit User</h2>
+        <form onSubmit={handleSubmitEditUserForm}>
           <div className="mb-4">
             <label
               htmlFor="name"
               className="block text-gray-700
-     text-sm font-bold mb-2"
+       text-sm font-bold mb-2"
             >
               Name
             </label>
             <input
-              value={name}
-              onChange={(e) => setUserName(e.target.value)}
+              value={editUserName}
+              onChange={(e) => setEditUserName(e.target.value)}
               name="name"
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
             />
@@ -115,8 +135,8 @@ export default function CreateUserForm({
               Job
             </label>
             <input
-              value={job}
-              onChange={(e) => setJob(e.target.value)}
+              value={editUserJob}
+              onChange={(e) => setEditUserJob(e.target.value)}
               name="job"
               className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
             />
@@ -126,7 +146,7 @@ export default function CreateUserForm({
             type="submit"
             className="bg-primary-950 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
           >
-            Create user
+            Edit user
           </button>
         </form>
       </div>

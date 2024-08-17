@@ -65,7 +65,7 @@ export default function SidebarItem({ item }: { item: SidebarItem }) {
       </li>
 
       {expanded && (
-        <div className="flex flex-col ml-10 space-y-3 mt">
+        <div className="flex flex-col ml-10 py-2">
           {submenu &&
             submenu.length > 0 &&
             submenu.map((sub) => <SubmenuItem key={sub.href} sub={sub} />)}

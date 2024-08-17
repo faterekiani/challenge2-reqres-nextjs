@@ -4,18 +4,19 @@ import Image from "next/image";
 import DeleteUserBtn from "./DeleteUserBtn";
 import { Ellipsis } from "lucide-react";
 import EditUserBtn from "./EditUserBtn";
-import { Dispatch, SetStateAction, useState } from "react";
-import Modal from "../../_components/Modal";
+import { Dispatch, SetStateAction } from "react";
+import defaultImage from "../../../../public/default.jpg";
 
+type Props = {
+  userInfo: TUsers;
+  allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
+};
 export default function UserTableItems({
   userInfo,
   allUserArray,
   onSetAllUserArray,
-}: {
-  userInfo: TUsers;
-  allUserArray: TUsers[];
-  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
-}) {
+}: Props) {
   const { id: userId, avatar, first_name, last_name, email } = userInfo;
 
   return (
@@ -27,7 +28,7 @@ export default function UserTableItems({
       <td className="flex items-center justify-center  w-[10%] text-sm text-gray-500 whitespace-nowrap">
         <div className="relative size-12">
           <Image
-            src={avatar}
+            src={avatar ? avatar : defaultImage}
             alt="user avatar"
             fill
             className="rounded-full object-cover"
@@ -50,7 +51,12 @@ export default function UserTableItems({
       </td>
 
       <td className="flex items-center justify-center gap-1 w-[20%] text-sm text-gray-500 whitespace-nowrap">
-        <EditUserBtn userId={userId} />
+        <EditUserBtn
+          userId={userId}
+          allUserArray={allUserArray}
+          onSetAllUserArray={onSetAllUserArray}
+        />
+
         <DeleteUserBtn
           userId={userId}
           allUserArray={allUserArray}

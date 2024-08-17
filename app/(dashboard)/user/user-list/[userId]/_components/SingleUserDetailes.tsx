@@ -2,17 +2,17 @@
 
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import { getSingleUserInfoApi } from "@/app/_lib/data-services";
-import { useQuery } from "@tanstack/react-query";
 import EditUserBtn from "../../../_components/EditUserBtn";
 import DeleteUserBtn from "../../../_components/DeleteUserBtn";
 import Spinner from "@/app/(dashboard)/_components/Spinner";
+import { useSingleUSer } from "../../../hooks/useSingleUser";
 
-export default function SingleUserDetailes({ userId }: { userId: number }) {
-  const { data, isError, error, isLoading } = useQuery({
-    queryKey: ["user", userId],
-    queryFn: () => getSingleUserInfoApi(userId),
-  });
+type Props = {
+  userId: number;
+};
+
+export default function SingleUserDetailes({ userId }: Props) {
+  const { singleUserData, isError, error, isLoading } = useSingleUSer(userId);
 
   if (isLoading)
     return (
@@ -21,9 +21,7 @@ export default function SingleUserDetailes({ userId }: { userId: number }) {
       </div>
     );
 
-  if (isError) return <div>Error: {error.message}</div>;
-
-  const { id, avatar, last_name, first_name, email } = data?.data;
+  const { id, avatar, last_name, first_name, email } = singleUserData?.data;
 
   return (
     <div className="flex flex-col items-center md:justify-between md:flex-row  gap-6 pb-4  md:border-b-[1px] md:border-indigo-300 px-8">
@@ -48,8 +46,8 @@ export default function SingleUserDetailes({ userId }: { userId: number }) {
       </div>
 
       <div className="flex gap-x-2 text-secondary">
-        <EditUserBtn />
-        <DeleteUserBtn userId={userId} allUserArray={data?.data} />
+        <EditUserBtn userId={userId} />
+        <DeleteUserBtn userId={userId} allUserArray={singleUserData?.data} />
       </div>
     </div>
   );

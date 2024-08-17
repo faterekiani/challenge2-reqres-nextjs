@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import UserTable from "../_components/UserTable";
 import Spinner from "../../_components/Spinner";
-import CreateUserBtn from "../_components/CreateUserBtn";
 import { SearchParamsType } from "@/app/_lib/types/types";
 
 // meatdata

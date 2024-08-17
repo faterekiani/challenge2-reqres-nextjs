@@ -9,6 +9,7 @@ import Spinner from "../../_components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
+import { useSingleUSer } from "../hooks/useSingleUser";
 
 export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();
@@ -36,11 +37,11 @@ export default function UserTable({ page, size }: SearchParamsType) {
 
   return (
     <div className="overflow-auto">
-      <div className="flex items-center justify-between">
-        <h1 className="ml-40 text-secondary text-2xl font-black tracking-tight uppercase">
+      <div className="flex items-center justify-between w-[900px] mx-auto">
+        <h1 className="text-secondary text-2xl font-black tracking-tight uppercase">
           List Of <span className="text-primary-950">users</span>
         </h1>
-        <div className="flex justify-end mr-40 pb-3">
+        <div className="flex justify-end pb-2">
           <CreateUserBtn
             allUserArray={allDataArray}
             onSetAllUserArray={setAllDataArray}

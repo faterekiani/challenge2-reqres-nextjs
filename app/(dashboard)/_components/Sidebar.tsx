@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
 import { Folder, LucideIcon, User } from "lucide-react";
 import SidebarItem from "./SidebarItem";
-import Logo from "./Logo";
-import SignOutBtn from "./SignOutBtn";
+import Link from "next/link";
+import SignOutBtn from "@/app/(auth)/_components/SignOutBtn";
 
 type SidebarItem = {
   name: string;
@@ -35,9 +34,14 @@ const items: SidebarItem[] = [
 
 export default function Sidebar() {
   return (
-    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r-[1px] border-primary-950 z-10 py-4">
+    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r-[1px] border-primary-950 z-10 py-4 ">
       <div className="flex flex-col w-full">
-        <Logo />
+        <Link
+          href="/"
+          className="text-2xl text-primary font-black text-primary-950 text-center border-b-[1px] border-primary-950 pb-4"
+        >
+          reqRes
+        </Link>
         <ul className="flex flex-col space-y-1 py-4 h-full overflow-y-auto">
           {items.map((item) => (
             <SidebarItem key={item.href} item={item} />

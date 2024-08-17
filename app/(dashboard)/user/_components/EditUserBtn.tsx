@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Pencil } from "lucide-react";
 
-import EditUserForm from "../user-list/[userId]/_components/EditUserForm";
+import EditUserForm from "./EditUserForm";
 import Modal from "../../_components/Modal";
+import { TUsers } from "@/app/_lib/types/types";
 
 export type TUpdateUserBody = {
   id: number;
@@ -14,15 +15,18 @@ export type TUpdateUserBody = {
   avatar: string;
 };
 
-export default function EditUserBtn({ userId }: { userId: number }) {
+type Props = {
+  userId: number;
+  allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
+};
+
+export default function EditUserBtn({
+  userId,
+  allUserArray,
+  onSetAllUserArray,
+}: Props) {
   const [showEditForm, setShowEditForm] = useState(false);
-
-  // const { updateUserMutate } = useEditUser();
-
-  // function handleEditUser(userId: number, updatedUserData: TUpdateUserBody) {
-  //   setShowEditForm(!showEditForm);
-  //   updateUserMutate({ id, ...updatedUserData });
-  // }
 
   return (
     <>
@@ -34,7 +38,12 @@ export default function EditUserBtn({ userId }: { userId: number }) {
       </button>
       {showEditForm && (
         <Modal isOpen={showEditForm} onClose={() => setShowEditForm(false)}>
-          <EditUserForm />
+          <EditUserForm
+            userId={userId}
+            allUserArray={allUserArray}
+            onSetAllUserArray={onSetAllUserArray}
+            onClose={() => setShowEditForm(false)}
+          />
         </Modal>
       )}
     </>

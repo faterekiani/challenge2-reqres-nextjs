@@ -1,5 +1,9 @@
-import { USER_API_URL } from "@/app/_lib/constant";
-import { RESOURCE_API_URL } from "@/app/_lib/constant";
+import {
+  LOGIN_API_URL,
+  RESOURCE_API_URL,
+  REGISTER_API_URL,
+  USER_API_URL,
+} from "@/app/_lib/constant";
 
 // USER
 
@@ -33,18 +37,18 @@ export async function getSingleUserInfoApi(userId: number) {
 
 // Create User
 export async function createNewUserApi({
-  name,
   job,
+  name,
 }: {
-  name: string;
   job: string;
+  name: string;
 }) {
   const res = await fetch(`${USER_API_URL}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, job }),
+    body: JSON.stringify({ job, name }),
   });
   if (!res.ok) {
     throw new Error("user could not be created");
@@ -69,16 +73,24 @@ export async function deleteUserApi(userId: number) {
   return res;
 }
 
+type Props = {
+  userId: number;
+  name: string;
+  job: string;
+};
+
 // Update User
-export async function updateUserApi(userId: number) {
+export async function updateUserApi({ userId, name, job }: Props) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: "morpheus",
-      email: "zion resident",
+      name,
+      job,
+      // name: "morpheus",
+      // email: "zion resident",
     }),
   });
 
@@ -94,7 +106,7 @@ export async function updateUserApi(userId: number) {
 // RESOURCE
 
 // Recource List
-export async function getAllResorcesApi(pageNumber: number, pageSize: number) {
+export async function getAllResorcesApi(pageNumber: string, pageSize: string) {
   const res = await fetch(
     `${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`
   );
@@ -116,6 +128,65 @@ export async function getSingleResourceInfoApi(resourceId: number) {
   }
 
   const data = await res.json();
+
+  return data;
+}
+
+//////////////////////////////////////////////////////////
+// AUTH
+
+// login
+export async function loginUserApi({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const response = await fetch(LOGIN_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  const data = await response.json();
+
+  return data;
+}
+
+// Register
+export async function registerUserApi({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const response = await fetch(REGISTER_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Registration  failed");
+  }
+
+  const data = await response.json();
 
   return data;
 }

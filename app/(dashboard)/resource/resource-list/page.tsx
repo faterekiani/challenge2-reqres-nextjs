@@ -15,8 +15,8 @@ export default function page({
   const pageCount = searchParams?.page || "1";
   const pageSize = searchParams?.size || "6";
   return (
-    <div>
-      <h1 className="mb-6 ml-40 text-secondary text-2xl font-black tracking-tight uppercase">
+    <div className="w-[900px] mx-auto">
+      <h1 className="text-secondary text-2xl font-black tracking-tight uppercase pb-2">
         List of <span className="text-primary-950">resources</span>
       </h1>
       <Suspense fallback={<Spinner />}>

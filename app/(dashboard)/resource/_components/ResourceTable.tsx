@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 
 import Spinner from "../../_components/Spinner";
 import ResourceTableItems from "./ResourceTableItems";
@@ -10,12 +9,10 @@ import { getAllResorcesApi } from "@/app/_lib/data-services";
 import { SearchParamsType, TResorces } from "@/app/_lib/types/types";
 import { useRouter } from "next/navigation";
 import Pagination from "../../_components/Pagination";
-import { useUsers } from "../../user/hooks/useUser";
+import useGetAllResources from "./useGetAllResources";
 
 export default function ResourceTable({ page, size }: SearchParamsType) {
   const router = useRouter();
-
-  const totalUserCount = 12;
 
   const {
     data: resourceData,
@@ -32,6 +29,8 @@ export default function ResourceTable({ page, size }: SearchParamsType) {
         <Spinner />
       </div>
     );
+
+  const totalUserCount = resourceData.total;
 
   const handlePageChange = (newPage: string) => {
     router.push(`?page=${newPage}`);

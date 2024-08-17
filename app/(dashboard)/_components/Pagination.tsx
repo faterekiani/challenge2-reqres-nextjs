@@ -21,8 +21,6 @@ function Pagination({
   const pageSize = Number(size);
   const totalPages = Math.ceil(totalUserCount / pageSize);
 
-  // const test = useSearchParams().get("page");
-
   const handlePrevPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
