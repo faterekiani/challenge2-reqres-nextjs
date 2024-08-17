@@ -2,7 +2,7 @@ import { User } from "lucide-react";
 
 type Props = {
   title: string;
-  count: number;
+  count: string;
   icon?: JSX.Element;
 };
 

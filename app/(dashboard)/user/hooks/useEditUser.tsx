@@ -1,6 +1,6 @@
 import { updateUserApi } from "@/app/_lib/data-services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showToast } from "../../_components/Toast";
+import { showToast } from "../../../_lib/components/Toast";
 import { TUpdateUserBody } from "../_components/EditUserBtn";
 
 export default function useEditUser() {

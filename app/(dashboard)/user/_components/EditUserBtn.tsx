@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Pencil } from "lucide-react";
 
 import EditUserForm from "./EditUserForm";
-import Modal from "../../_components/Modal";
+import Modal from "../../../_lib/components/Modal";
 import { TUsers } from "@/app/_lib/types/types";
 
 export type TUpdateUserBody = {

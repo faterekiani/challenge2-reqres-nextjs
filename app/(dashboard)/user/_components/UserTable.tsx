@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import { SearchParamsType, TUsers } from "@/app/_lib/types/types";
 
 import { useUsers } from "../hooks/useUser";
-import Spinner from "../../_components/Spinner";
+import Spinner from "../../../_lib/components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
-import { useSingleUSer } from "../hooks/useSingleUser";
 
 export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();

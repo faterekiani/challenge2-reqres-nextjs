@@ -1,6 +1,6 @@
 import { SearchParamsType } from "@/app/_lib/types/types";
 import { Suspense } from "react";
-import Spinner from "../../_components/Spinner";
+import Spinner from "../../../_lib/components/Spinner";
 import ResourceTable from "../_components/ResourceTable";
 
 export const metadata = {

@@ -3,7 +3,7 @@ import { TUsers } from "@/app/_lib/types/types";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUserApi } from "@/app/_lib/data-services";
-import { showToast } from "../../_components/Toast";
+import { showToast } from "../../../_lib/components/Toast";
 import { Dispatch, SetStateAction } from "react";
 
 export default function DeleteUserBtn({

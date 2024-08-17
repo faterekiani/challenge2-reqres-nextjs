@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { Dispatch, SetStateAction, useState } from "react";
-import Modal from "../../_components/Modal";
+import Modal from "../../../_lib/components/Modal";
 import CreateUserForm from "./CreateUserForm";
 import { TUsers } from "@/app/_lib/types/types";
 

@@ -34,7 +34,7 @@ const items: SidebarItem[] = [
 
 export default function Sidebar() {
   return (
-    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r-[1px] border-primary-950 z-10 py-4 ">
+    <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r-[1px] border-primary-950 z-20 py-4 ">
       <div className="flex flex-col w-full">
         <Link
           href="/"

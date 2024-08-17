@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+
 function HamburgerMenu({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -10,7 +11,7 @@ function HamburgerMenu({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="">
+    <div className="z-50">
       <button
         onClick={toggleMenu}
         className="block lg:hidden text-secondary z-50"
@@ -19,7 +20,7 @@ function HamburgerMenu({ children }: { children: React.ReactNode }) {
       </button>
       <div
         className={`fixed top-0 left-0 h-screen w-64 bg-white transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0 " : "-translate-x-full"
         }`}
       >
         {children}
