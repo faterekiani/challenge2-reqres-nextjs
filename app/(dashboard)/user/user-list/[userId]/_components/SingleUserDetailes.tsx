@@ -19,6 +19,8 @@ export default function SingleUserDetails({ userId }: Props) {
       </div>
     );
 
+  if (!singleUserData) return null;
+
   const { id, avatar, last_name, first_name, email } = singleUserData?.data;
 
   return (

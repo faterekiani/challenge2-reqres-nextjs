@@ -16,19 +16,15 @@ export default function RegisterForm() {
   const { mutate: registerMutate } = useMutation({
     mutationFn: registerUserApi,
     onSuccess: (data) => {
-      router.replace("/login");
       showToast("success", "Registration successful!");
       setCookie(data.token);
+      router.replace("/login");
     },
     onError: () => showToast("error", "Incorrect username or password"),
   });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    email && password && registerMutate({ email, password });
-  }
-
-  function onSubmit() {
     email && password && registerMutate({ email, password });
   }
 

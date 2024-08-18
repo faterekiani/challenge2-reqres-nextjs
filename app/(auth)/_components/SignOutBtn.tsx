@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 function SignOutBtn() {
   const router = useRouter();
 
-  function handleSignOut() {
-    removeCookie();
+  async function handleSignOut() {
+    await removeCookie();
     router.replace("/user/login");
   }
 

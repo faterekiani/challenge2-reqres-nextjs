@@ -16,9 +16,9 @@ export default function LoginForm() {
   const { mutate: loginMutate } = useMutation({
     mutationFn: loginUserApi,
     onSuccess: (data) => {
-      router.replace("/user");
       showToast("success", "You are logged in");
       setCookie(data.token);
+      router.replace("/user");
     },
     onError: () => showToast("error", "Incorrect username or password"),
   });

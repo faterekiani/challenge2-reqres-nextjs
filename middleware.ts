@@ -11,8 +11,14 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/login", req.nextUrl));
   }
 
-  // If token exists and matches protected routes, set Authorization header
+  const protectedRoutes = ["/login", "/register"];
+
+  if (token && protectedRoutes.includes(req.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/user", req.url));
+  }
+
   if (token && isDashboard) {
+    // If token exists and matches protected routes, set Authorization header
     const url = new URL(req.nextUrl);
     url.searchParams.set("Authorization", `Bearer ${token}`);
     return NextResponse.rewrite(url);
@@ -23,5 +29,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/user/:path*", "/resource/:path*"],
+  matcher: ["/user/:path*", "/resource/:path*", "/login", "/register"],
 };
