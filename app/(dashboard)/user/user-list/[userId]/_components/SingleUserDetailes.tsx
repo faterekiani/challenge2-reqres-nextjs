@@ -15,7 +15,7 @@ export default function SingleUserDetails({ userId }: Props) {
   if (isLoading)
     return (
       <div>
-        <Spinner />
+        <Spinner className="spinner" />
       </div>
     );
 

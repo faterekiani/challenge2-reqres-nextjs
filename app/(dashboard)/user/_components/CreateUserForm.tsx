@@ -6,6 +6,7 @@ import { createNewUserApi } from "@/app/_lib/data-services";
 import { Dispatch, SetStateAction, useState } from "react";
 import { showToast } from "@/app/_lib/components/Toast";
 import { TUsers } from "@/app/_lib/types/types";
+import Spinner from "@/app/_lib/components/Spinner";
 
 type Props = {
   allUserArray: TUsers[];
@@ -26,7 +27,7 @@ export default function CreateUserForm({
   const router = useRouter();
 
   // fetch data
-  const { mutate: createUserMutate } = useMutation({
+  const { mutate: createUserMutate, isPending } = useMutation({
     mutationFn: createNewUserApi,
     onSuccess: (data: TUsers) => {
       onSetAllUserArray((user) => [
@@ -42,7 +43,6 @@ export default function CreateUserForm({
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
-      // router.push("/user/user-list");
       onClose();
     },
     onError: (err) => showToast("error", err.message),
@@ -51,7 +51,6 @@ export default function CreateUserForm({
   function handleSubmitCreateUserForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     createUserMutate({ job, name });
-    // onClose();
   }
 
   return (
@@ -107,9 +106,9 @@ export default function CreateUserForm({
         <button
           type="submit"
           disabled={!name || !lastName || !newEmail}
-          className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
+          className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-32 flex items-center justify-center"
         >
-          Create user
+          {isPending ? <Spinner className="spinner-mini" /> : "Create user"}
         </button>
       </form>
     </div>

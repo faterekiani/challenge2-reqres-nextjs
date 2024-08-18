@@ -24,7 +24,7 @@ export default function UserTable({ page, size }: SearchParamsType) {
   if (isLoading)
     return (
       <div>
-        <Spinner />
+        <Spinner className="spinner" />
       </div>
     );
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { setCookie } from "@/app/_lib/auth/action";
+import Spinner from "@/app/_lib/components/Spinner";
 import { showToast } from "@/app/_lib/components/Toast";
 import { loginUserApi } from "@/app/_lib/data-services";
 import { useMutation } from "@tanstack/react-query";
@@ -13,13 +14,14 @@ export default function LoginForm() {
 
   const router = useRouter();
 
-  const { mutate: loginMutate } = useMutation({
+  const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: loginUserApi,
     onSuccess: (data) => {
       showToast("success", "You are logged in");
       setCookie(data.token);
       router.replace("/user");
     },
+
     onError: () => showToast("error", "Incorrect username or password"),
   });
 
@@ -68,9 +70,9 @@ text-sm font-bold mb-2"
           <button
             type="submit"
             disabled={!email || !password}
-            className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
+            className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-28 flex items-center justify-center"
           >
-            Login
+            {isPending ? <Spinner className="spinner-mini" /> : "Login"}
           </button>
         </form>
       </div>

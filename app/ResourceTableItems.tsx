@@ -24,9 +24,7 @@ export default function ResourceTableItems({ resourceInfos }: Props) {
         <td
           className={`flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap`}
         >
-          <span
-            className={`flex items-center justify-center bg-[${color}] text-white p-1 w-[85px]`}
-          >
+          <span className={`bg-[${color}] text-white p-1 w-[85px]`}>
             {color}
           </span>
         </td>

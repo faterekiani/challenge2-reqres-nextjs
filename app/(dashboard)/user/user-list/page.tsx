@@ -17,7 +17,7 @@ export default function Page({
   const pageSize = searchParams?.size || "6";
 
   return (
-    <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<Spinner className="spinner" />}>
       <UserTable page={pageCount} size={pageSize} />
     </Suspense>
   );

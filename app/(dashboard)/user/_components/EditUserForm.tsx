@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useSingleUSer } from "../hooks/useSingleUser";
 import { showToast } from "@/app/_lib/components/Toast";
+import Spinner from "@/app/_lib/components/Spinner";
 
 type Props = {
   userId: number;
@@ -31,7 +32,7 @@ export default function EditUserForm({
   const { singleUserData } = useSingleUSer(userId);
 
   // EDIT
-  const { mutate: EditUserMutate } = useMutation({
+  const { mutate: EditUserMutate, isPending } = useMutation({
     mutationFn: updateUserApi,
     onSuccess: (data) => {
       onSetAllUserArray(
@@ -122,9 +123,9 @@ export default function EditUserForm({
 
         <button
           type="submit"
-          className="bg-primary-950 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
+          className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-28 flex items-center justify-center"
         >
-          Edit user
+          {isPending ? <Spinner className="spinner-mini" /> : "Edit User"}
         </button>
       </form>
     </div>

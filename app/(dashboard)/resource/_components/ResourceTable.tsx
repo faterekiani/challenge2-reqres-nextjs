@@ -26,7 +26,7 @@ export default function ResourceTable({ page, size }: SearchParamsType) {
   if (isLoading)
     return (
       <div>
-        <Spinner />
+        <Spinner className="spinner" />
       </div>
     );
 

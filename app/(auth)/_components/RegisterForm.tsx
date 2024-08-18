@@ -1,6 +1,7 @@
 "use client";
 
 import { setCookie } from "@/app/_lib/auth/action";
+import Spinner from "@/app/_lib/components/Spinner";
 import { showToast } from "@/app/_lib/components/Toast";
 import { registerUserApi } from "@/app/_lib/data-services";
 import { useMutation } from "@tanstack/react-query";
@@ -13,7 +14,7 @@ export default function RegisterForm() {
 
   const router = useRouter();
 
-  const { mutate: registerMutate } = useMutation({
+  const { mutate: registerMutate, isPending } = useMutation({
     mutationFn: registerUserApi,
     onSuccess: (data) => {
       showToast("success", "Registration successful!");
@@ -68,9 +69,9 @@ text-sm font-bold mb-2"
           <button
             type="submit"
             disabled={!email || !password}
-            className="bg-primary-950 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
+            className="bg-primary-950 hover:bg-primary-700 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-28 flex items-center justify-center"
           >
-            Register
+            {isPending ? <Spinner className="spinner-mini" /> : "Register"}
           </button>
         </form>
       </div>

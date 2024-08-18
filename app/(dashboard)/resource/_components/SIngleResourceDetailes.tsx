@@ -22,7 +22,7 @@ export default function SingleResourceDetailes({
   if (isLoading)
     return (
       <div>
-        <Spinner />
+        <Spinner className="spinner" />
       </div>
     );
   if (isError) return <div>Error: {error.message}</div>;
