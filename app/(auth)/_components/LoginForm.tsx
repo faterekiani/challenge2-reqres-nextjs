@@ -16,7 +16,7 @@ export default function LoginForm() {
   const { mutate: loginMutate } = useMutation({
     mutationFn: loginUserApi,
     onSuccess: (data) => {
-      router.replace("/user/user-list");
+      router.replace("/user");
       showToast("success", "You are logged in");
       setCookie(data.token);
     },
@@ -25,10 +25,6 @@ export default function LoginForm() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    email && password && loginMutate({ email, password });
-  }
-
-  function onSubmit() {
     email && password && loginMutate({ email, password });
   }
 
@@ -73,7 +69,6 @@ text-sm font-bold mb-2"
             type="submit"
             disabled={!email || !password}
             className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded focus:outline-red-900 mt-2 transition-all"
-            // onClick={onSubmit}
           >
             Login
           </button>

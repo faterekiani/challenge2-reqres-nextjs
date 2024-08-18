@@ -1,11 +1,17 @@
 import Link from "next/link";
 
-export default function NotFound() {
+function NotFound() {
   return (
-    <div>
-      <h2 className="text-red-600">Not Found</h2>
-      <p>Could not find requested resource</p>
-      <Link href="/">Return Home</Link>
-    </div>
+    <main className="flex flex-col items-center h-screen justify-center space-y-8 bg-primary-100">
+      <h1 className="text-3xl font-bold">This page could not be found :(</h1>
+      <Link
+        href="/user"
+        className="inline-block bg-primary-950 text-white px-6 py-3 text-lg "
+      >
+        Go back home
+      </Link>
+    </main>
   );
 }
+
+export default NotFound;

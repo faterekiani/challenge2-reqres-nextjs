@@ -7,11 +7,3 @@ export default function Header() {
     </header>
   );
 }
-
-// export default function Header() {
-//   return (
-//     <header className="sticky top-0 bg-white px-6 py-5 border-b-[1px] border-primary-950 z-10">
-//       <p className="font-medium text-secondary flex justify-end">fatere</p>
-//     </header>
-//   );
-// }

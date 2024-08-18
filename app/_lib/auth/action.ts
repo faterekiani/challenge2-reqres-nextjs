@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
 
 export async function setCookie(token: string) {
   await cookies().set("token", token);

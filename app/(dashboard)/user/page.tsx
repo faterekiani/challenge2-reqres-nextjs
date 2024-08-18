@@ -1,5 +1,5 @@
-import { SearchParamsType } from "../_lib/types/types";
-import TotalStats from "./_components/TotalStats";
+import { SearchParamsType } from "@/app/_lib/types/types";
+import TotalStats from "../_components/TotalStats";
 
 export default function Home({
   searchParams,

@@ -21,7 +21,7 @@ const items: SidebarItem[] = [
   {
     name: "User",
     icon: User,
-    href: "/",
+    href: "/user",
     submenu: [{ name: "user list", href: "/user/user-list" }],
   },
   {
@@ -37,7 +37,7 @@ export default function Sidebar() {
     <div className="fixed top-0 left-0 h-screen w-64 bg-white border-r-[1px] border-primary-950 z-20 py-4 ">
       <div className="flex flex-col w-full">
         <Link
-          href="/"
+          href="/user"
           className="text-2xl text-primary font-black text-primary-950 text-center border-b-[1px] border-primary-950 pb-4"
         >
           reqRes
