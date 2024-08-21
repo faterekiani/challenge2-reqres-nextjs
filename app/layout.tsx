@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Provider from "./_lib/provider";
 import ToastProvider from "./_lib/components/Toast";
+import StoreProvider from "./StoreProvider";
 
 // FONT
 const jakarta = Plus_Jakarta_Sans({
@@ -28,7 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={jakarta.className}>
         <Provider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </ToastProvider>
         </Provider>
       </body>
     </html>
