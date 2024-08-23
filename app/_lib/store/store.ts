@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import userReducer from "../../(dashboard)/user/slice";
 
 export const makeStore = () => {
   const store = configureStore({
-    reducer: {},
+    reducer: { userReducer },
     middleware: (getNamedMiddleware) => getNamedMiddleware().concat(),
   });
   setupListeners(store.dispatch);

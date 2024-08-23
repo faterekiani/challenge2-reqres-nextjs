@@ -9,11 +9,15 @@ import Spinner from "../../../_lib/components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
+import { useAppSelector } from "@/app/_lib/store/hooks";
 
 export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();
 
   const { isLoading, userData } = useUsers(page, size);
+
+  const { allData } = useAppSelector((state) => state.userReducer);
+  console.log("alldata", allData[0]);
 
   const [allDataArray, setAllDataArray] = useState<TUsers[]>([]);
 
