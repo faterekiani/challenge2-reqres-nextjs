@@ -4,19 +4,12 @@ import Image from "next/image";
 import DeleteUserBtn from "./DeleteUserBtn";
 import { Ellipsis } from "lucide-react";
 import EditUserBtn from "./EditUserBtn";
-import { Dispatch, SetStateAction } from "react";
 import defaultImage from "../../../../public/default.jpg";
 
 type Props = {
   userInfo: TUsers;
-  allUserArray: TUsers[];
-  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
 };
-export default function UserTableItems({
-  userInfo,
-  allUserArray,
-  onSetAllUserArray,
-}: Props) {
+export default function UserTableItems({ userInfo }: Props) {
   const { id: userId, avatar, first_name, last_name, email } = userInfo;
 
   return (
@@ -51,11 +44,7 @@ export default function UserTableItems({
       </td>
 
       <td className="flex items-center justify-center gap-1 w-[20%] text-sm text-gray-500 whitespace-nowrap">
-        <EditUserBtn
-          userId={userId}
-          allUserArray={allUserArray}
-          onSetAllUserArray={onSetAllUserArray}
-        />
+        <EditUserBtn userId={userId} />
 
         <DeleteUserBtn userId={userId} />
 

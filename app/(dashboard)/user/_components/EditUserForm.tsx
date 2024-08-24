@@ -1,32 +1,24 @@
 import { updateUserApi } from "@/app/_lib/data-services";
-import { TUsers } from "@/app/_lib/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSingleUSer } from "../hooks/useSingleUser";
 import { showToast } from "@/app/_lib/components/Toast";
 import Spinner from "@/app/_lib/components/Spinner";
+import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { editUser } from "../slice";
 
 type Props = {
   userId: number;
-  allUserArray: TUsers[];
-  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
-
   onClose: () => void;
 };
-export default function EditUserForm({
-  userId,
-  onClose,
-  allUserArray,
-  onSetAllUserArray,
-}: Props) {
+export default function EditUserForm({ userId, onClose }: Props) {
   const [editUserName, setEditUserName] = useState("");
   const [editUserJob, setEditUserJob] = useState("");
   const [lastName, setLastName] = useState("");
   const [newEmail, setNewEmail] = useState("");
 
   const queryClient = useQueryClient();
-  const router = useRouter();
+  const dispatch = useAppDispatch();
 
   // SINGLE USER
   const { singleUserData } = useSingleUSer(userId);
@@ -35,18 +27,14 @@ export default function EditUserForm({
   const { mutate: EditUserMutate, isPending } = useMutation({
     mutationFn: updateUserApi,
     onSuccess: (data) => {
-      onSetAllUserArray(
-        allUserArray.map((item) => {
-          if (item.id === userId)
-            return {
-              ...item,
-              first_name: data.name,
-              last_name: lastName,
-              email: newEmail,
-            };
-          else return item;
-        })
-      );
+      const updateUser = {
+        first_name: data.name,
+        last_name: lastName,
+        email: newEmail,
+      };
+
+      dispatch(editUser({ userId, updateUser }));
+
       showToast("success", "user successfully Updated");
       queryClient.invalidateQueries({
         queryKey: ["users"],
@@ -131,3 +119,16 @@ export default function EditUserForm({
     </div>
   );
 }
+
+// onSetAllUserArray(
+//   allUserArray.map((item) => {
+//     if (item.id === userId)
+//       return {
+//         ...item,
+//         first_name: data.name,
+//         last_name: lastName,
+//         email: newEmail,
+//       };
+//     else return item;
+//   })
+// );

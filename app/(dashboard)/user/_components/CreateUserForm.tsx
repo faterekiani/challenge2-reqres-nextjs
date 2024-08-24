@@ -1,44 +1,46 @@
 "use client";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 import { createNewUserApi } from "@/app/_lib/data-services";
-import { Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { showToast } from "@/app/_lib/components/Toast";
 import { TUsers } from "@/app/_lib/types/types";
 import Spinner from "@/app/_lib/components/Spinner";
+import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { createNewUser } from "../slice";
 
 type Props = {
-  allUserArray: TUsers[];
-  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
   onClose: () => void;
 };
-export default function CreateUserForm({
-  allUserArray,
-  onSetAllUserArray,
-  onClose,
-}: Props) {
-  const [name, setUserName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [job, setJob] = useState("");
+export default function CreateUserForm({ onClose }: Props) {
+  const [formData, setFormData] = useState({
+    name: "",
+    lastName: "",
+    newEmail: "",
+    job: "",
+  });
+
+  const { name, lastName, newEmail, job } = formData;
+
+  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const queryClient = useQueryClient();
-  const router = useRouter();
+
+  const dispatch = useAppDispatch();
 
   // fetch data
   const { mutate: createUserMutate, isPending } = useMutation({
     mutationFn: createNewUserApi,
     onSuccess: (data: TUsers) => {
-      onSetAllUserArray((user) => [
-        {
-          ...data,
-          first_name: name,
-          last_name: lastName,
-          email: newEmail,
-        },
-        ...user,
-      ]);
+      const newUser = {
+        ...data,
+        first_name: name,
+        last_name: lastName,
+        email: newEmail,
+      };
+      dispatch(createNewUser(newUser));
+
       showToast("success", "user successfully created");
       queryClient.invalidateQueries({
         queryKey: ["users"],
@@ -67,7 +69,7 @@ export default function CreateUserForm({
           </label>
           <input
             value={name}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => onChange(e)}
             name="name"
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
           />
@@ -82,7 +84,7 @@ export default function CreateUserForm({
           </label>
           <input
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => onChange(e)}
             name="lastName"
             className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
           />
@@ -97,8 +99,8 @@ export default function CreateUserForm({
           </label>
           <input
             value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
-            name="job"
+            onChange={(e) => onChange(e)}
+            name="newEmail"
             className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
           />
         </div>

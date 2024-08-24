@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SearchParamsType, TUsers } from "@/app/_lib/types/types";
 
 import { useUsers } from "../hooks/useUser";
@@ -16,15 +16,18 @@ export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { isLoading, userData } = useUsers(page, size);
+  const { isLoading, userData } = useUsers(page, size); //get all users
 
-  const { allData } = useAppSelector((state) => state.userReducer);
-
+  // set all users in the redux store
   useEffect(() => {
     if (userData) {
       dispatch(addData(userData?.data));
     }
   }, [userData, dispatch]);
+
+  const { allDataRedux } = useAppSelector((state) => state.userReducer); //get redux store
+
+  console.log(allDataRedux);
 
   if (isLoading)
     return (
@@ -32,8 +35,6 @@ export default function UserTable({ page, size }: SearchParamsType) {
         <Spinner className="spinner" />
       </div>
     );
-
-  const totalUserCount = userData.total;
 
   const handlePageChange = (newPage: string) => {
     router.push(`?page=${newPage}`);
@@ -46,10 +47,7 @@ export default function UserTable({ page, size }: SearchParamsType) {
           List Of <span className="text-primary-950">users</span>
         </h1>
         <div className="flex justify-end pb-2">
-          {/* <CreateUserBtn
-            allUserArray={allDataArray}
-            onSetAllUserArray={setAllDataArray}
-          /> */}
+          <CreateUserBtn />
         </div>
       </div>
 
@@ -73,23 +71,13 @@ export default function UserTable({ page, size }: SearchParamsType) {
           </tr>
         </thead>
         <tbody>
-          {allData?.map((userInfo: TUsers) => (
-            <UserTableItems
-              key={userInfo.id}
-              userInfo={userInfo}
-              // allUserArray={allDataArray}
-              // onSetAllUserArray={setAllDataArray}
-            />
+          {allDataRedux?.map((userInfo: TUsers) => (
+            <UserTableItems key={userInfo.id} userInfo={userInfo} />
           ))}
         </tbody>
       </table>
 
-      <Pagination
-        totalUserCount={totalUserCount}
-        page={page}
-        size={size}
-        onPageChange={handlePageChange}
-      />
+      <Pagination page={page} size={size} onPageChange={handlePageChange} />
     </div>
   );
 }

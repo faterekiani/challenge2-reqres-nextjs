@@ -1,18 +1,11 @@
 "use client";
 
 import { Plus } from "lucide-react";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import Modal from "../../../_lib/components/Modal";
 import CreateUserForm from "./CreateUserForm";
-import { TUsers } from "@/app/_lib/types/types";
 
-export default function CreateUserBtn({
-  allUserArray,
-  onSetAllUserArray,
-}: {
-  allUserArray: TUsers[];
-  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
-}) {
+export default function CreateUserBtn({}) {
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   return (
@@ -26,11 +19,7 @@ export default function CreateUserBtn({
       </button>
       {showCreateForm && (
         <Modal isOpen={showCreateForm} onClose={() => setShowCreateForm(false)}>
-          <CreateUserForm
-            allUserArray={allUserArray}
-            onSetAllUserArray={onSetAllUserArray}
-            onClose={() => setShowCreateForm(false)}
-          />
+          <CreateUserForm onClose={() => setShowCreateForm(false)} />
         </Modal>
       )}
     </>

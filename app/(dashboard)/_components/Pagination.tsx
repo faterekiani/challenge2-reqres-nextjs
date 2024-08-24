@@ -1,23 +1,19 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { useUsers } from "../user/hooks/useUser";
 
 type TPaginationProps = {
   page: string;
   size: string;
-  totalUserCount: number;
   onPageChange: (newPage: string) => void;
 };
 
-function Pagination({
-  totalUserCount,
-  page,
-  size,
-  onPageChange,
-}: TPaginationProps) {
+function Pagination({ page, size, onPageChange }: TPaginationProps) {
+  const { userData } = useUsers(page, size);
+  const totalUserCount = userData.total;
+
   const currentPage = Number(page);
-  const currentSize = Number(size);
   const pageSize = Number(size);
   const totalPages = Math.ceil(totalUserCount / pageSize);
 
