@@ -17,9 +17,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    addData: (state, action: { payload: TUsers }) => {
-      const updatedData = [...state.allData, action.payload];
-      state.allData = updatedData;
+    addData: (state, action) => {
+      state.allData = action.payload;
     },
     deleteUser: (state, action) => {
       const userId = action.payload;

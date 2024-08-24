@@ -57,11 +57,7 @@ export default function UserTableItems({
           onSetAllUserArray={onSetAllUserArray}
         />
 
-        <DeleteUserBtn
-          userId={userId}
-          allUserArray={allUserArray}
-          onSetAllUserArray={onSetAllUserArray}
-        />
+        <DeleteUserBtn userId={userId} />
 
         <Link href={`/user/user-list/${userInfo.id}`}>
           <Ellipsis

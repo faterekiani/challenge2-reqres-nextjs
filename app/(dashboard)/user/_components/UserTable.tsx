@@ -9,21 +9,22 @@ import Spinner from "../../../_lib/components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
-import { useAppSelector } from "@/app/_lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/app/_lib/store/hooks";
+import { addData } from "../slice";
 
 export default function UserTable({ page, size }: SearchParamsType) {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const { isLoading, userData } = useUsers(page, size);
 
   const { allData } = useAppSelector((state) => state.userReducer);
-  console.log("alldata", allData[0]);
-
-  const [allDataArray, setAllDataArray] = useState<TUsers[]>([]);
 
   useEffect(() => {
-    if (userData) setAllDataArray(userData?.data);
-  }, [userData]);
+    if (userData) {
+      dispatch(addData(userData?.data));
+    }
+  }, [userData, dispatch]);
 
   if (isLoading)
     return (
@@ -45,10 +46,10 @@ export default function UserTable({ page, size }: SearchParamsType) {
           List Of <span className="text-primary-950">users</span>
         </h1>
         <div className="flex justify-end pb-2">
-          <CreateUserBtn
+          {/* <CreateUserBtn
             allUserArray={allDataArray}
             onSetAllUserArray={setAllDataArray}
-          />
+          /> */}
         </div>
       </div>
 
@@ -72,12 +73,12 @@ export default function UserTable({ page, size }: SearchParamsType) {
           </tr>
         </thead>
         <tbody>
-          {allDataArray?.map((userInfo: TUsers) => (
+          {allData?.map((userInfo: TUsers) => (
             <UserTableItems
               key={userInfo.id}
               userInfo={userInfo}
-              allUserArray={allDataArray}
-              onSetAllUserArray={setAllDataArray}
+              // allUserArray={allDataArray}
+              // onSetAllUserArray={setAllDataArray}
             />
           ))}
         </tbody>

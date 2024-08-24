@@ -16,11 +16,5 @@ export function useUsers(pageNumber: string, pageSize: string) {
     queryFn: () => getAllUsersInfoApi(pageNumber, pageSize),
   });
 
-  useEffect(() => {
-    if (userData) {
-      dispatch(addData(userData?.data));
-    }
-  }, [userData, dispatch]);
-
   return { isLoading, error, userData };
 }
