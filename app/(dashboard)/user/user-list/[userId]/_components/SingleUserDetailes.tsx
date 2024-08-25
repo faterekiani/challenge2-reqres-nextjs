@@ -4,13 +4,15 @@ import { Mail } from "lucide-react";
 import Image from "next/image";
 import { useSingleUSer } from "../../../hooks/useSingleUser";
 import Spinner from "@/app/_lib/components/Spinner";
+import EditUserBtn from "../../../_components/EditUserBtn";
+import DeleteUserBtn from "../../../_components/DeleteUserBtn";
 
 type Props = {
   userId: number;
 };
 
 export default function SingleUserDetails({ userId }: Props) {
-  const { singleUserData, isError, error, isLoading } = useSingleUSer(userId);
+  const { singleUserData, isLoading } = useSingleUSer(userId);
 
   if (isLoading)
     return (
@@ -39,10 +41,14 @@ export default function SingleUserDetails({ userId }: Props) {
             <span>{last_name}</span>
             <span>{first_name}</span>
           </div>
-          <h2 className="flex items-center gap-2 text-sm">
+          <h2 className="flex items-center justify-between gap-2 text-sm">
             <Mail size={15} /> {email}
           </h2>
         </div>
+      </div>
+      <div className="space-x-2 mr-10">
+        <EditUserBtn userId={userId} />
+        <DeleteUserBtn userId={userId} />
       </div>
     </div>
   );

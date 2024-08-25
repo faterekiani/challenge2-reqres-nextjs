@@ -1,7 +1,7 @@
 import { updateUserApi } from "@/app/_lib/data-services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { showToast } from "../../../_lib/components/Toast";
-import { TUpdateUserBody } from "../_components/EditUserBtn";
+import { TUsers } from "@/app/_lib/types/types";
 
 export default function useEditUser() {
   const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export default function useEditUser() {
     mutationFn: updateUserApi,
     onSuccess: () => {
       showToast("success", "user successfully updated");
-      (updatedUser: TUpdateUserBody) => {
+      (updatedUser: TUsers) => {
         queryClient.setQueryData(["user", updatedUser.id], updatedUser);
       };
     },

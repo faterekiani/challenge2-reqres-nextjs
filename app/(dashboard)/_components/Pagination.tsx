@@ -11,7 +11,8 @@ type TPaginationProps = {
 
 function Pagination({ page, size, onPageChange }: TPaginationProps) {
   const { userData } = useUsers(page, size);
-  const totalUserCount = userData.total;
+
+  const totalUserCount = userData?.total;
 
   const currentPage = Number(page);
   const pageSize = Number(size);

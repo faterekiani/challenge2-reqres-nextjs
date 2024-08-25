@@ -9,16 +9,11 @@ import { getAllResorcesApi } from "@/app/_lib/data-services";
 import { SearchParamsType, TResorces } from "@/app/_lib/types/types";
 import { useRouter } from "next/navigation";
 import Pagination from "../../_components/Pagination";
-import useGetAllResources from "./useGetAllResources";
 
 export default function ResourceTable({ page, size }: SearchParamsType) {
   const router = useRouter();
 
-  const {
-    data: resourceData,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: resourceData, isLoading } = useQuery({
     queryKey: ["resource", page, size],
     queryFn: () => getAllResorcesApi(page, size),
   });
@@ -29,8 +24,6 @@ export default function ResourceTable({ page, size }: SearchParamsType) {
         <Spinner className="spinner" />
       </div>
     );
-
-  const totalUserCount = resourceData.total;
 
   const handlePageChange = (newPage: string) => {
     router.push(`?page=${newPage}`);
@@ -59,12 +52,7 @@ export default function ResourceTable({ page, size }: SearchParamsType) {
           ))}
         </tbody>
       </table>
-      <Pagination
-        page={page}
-        size={size}
-        totalUserCount={totalUserCount}
-        onPageChange={handlePageChange}
-      />
+      <Pagination page={page} size={size} onPageChange={handlePageChange} />
     </div>
   );
 }

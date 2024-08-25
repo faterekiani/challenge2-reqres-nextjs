@@ -1,13 +1,15 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNewUserApi } from "@/app/_lib/data-services";
 import { ChangeEvent, useState } from "react";
-import { showToast } from "@/app/_lib/components/Toast";
-import { TUsers } from "@/app/_lib/types/types";
-import Spinner from "@/app/_lib/components/Spinner";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { showToast } from "@/app/_lib/components/Toast";
+
+import { createNewUserApi } from "@/app/_lib/data-services";
+import { TUsers } from "@/app/_lib/types/types";
 import { createNewUser } from "../slice";
+
+import Spinner from "@/app/_lib/components/Spinner";
 
 type Props = {
   onClose: () => void;
@@ -22,7 +24,7 @@ export default function CreateUserForm({ onClose }: Props) {
 
   const { name, lastName, newEmail, job } = formData;
 
-  const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const queryClient = useQueryClient();

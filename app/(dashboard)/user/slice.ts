@@ -1,4 +1,4 @@
-import { TUserInfo, TUsers } from "@/app/_lib/types/types";
+import { TUsers } from "@/app/_lib/types/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 type UserState = {
@@ -32,6 +32,7 @@ const userSlice = createSlice({
     createNewUser: (state, action) => {
       state.allDataRedux.push(action.payload);
     },
+
     editUser: (state, action) => {
       const { userId, updateUser } = action.payload;
       return {
@@ -46,4 +47,5 @@ const userSlice = createSlice({
 
 export const { addData, deleteUser, createNewUser, editUser } =
   userSlice.actions;
+
 export default userSlice.reducer;

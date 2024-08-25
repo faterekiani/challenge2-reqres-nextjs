@@ -6,14 +6,6 @@ import { Pencil } from "lucide-react";
 import EditUserForm from "./EditUserForm";
 import Modal from "../../../_lib/components/Modal";
 
-export type TUpdateUserBody = {
-  id: number;
-  email: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
-};
-
 type Props = {
   userId: number;
 };

@@ -5,9 +5,12 @@ import { deleteUserApi } from "@/app/_lib/data-services";
 import { showToast } from "../../../_lib/components/Toast";
 import { deleteUser } from "../slice";
 import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 
 export default function DeleteUserBtn({ userId }: { userId: number }) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
@@ -20,6 +23,7 @@ export default function DeleteUserBtn({ userId }: { userId: number }) {
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
+      router.push("/user/user-list");
     },
     onError: (err) => showToast("error", err.message),
   });
@@ -33,8 +37,3 @@ export default function DeleteUserBtn({ userId }: { userId: number }) {
     </button>
   );
 }
-
-// onSuccess: () => {
-//   onSetAllUserArray(
-//     allUserArray.filter((user: TUsers) => user.id !== userId)
-//   );

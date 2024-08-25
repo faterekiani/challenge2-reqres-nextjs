@@ -14,6 +14,7 @@ export default function page({
 }) {
   const pageCount = searchParams?.page || "1";
   const pageSize = searchParams?.size || "6";
+  console.log(searchParams?.page);
   return (
     <div className="w-[900px] mx-auto">
       <h1 className="text-secondary text-2xl font-black tracking-tight uppercase pb-2">

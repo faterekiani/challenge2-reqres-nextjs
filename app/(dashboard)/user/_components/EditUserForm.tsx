@@ -1,12 +1,14 @@
-import { updateUserApi } from "@/app/_lib/data-services";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useSingleUSer } from "../hooks/useSingleUser";
-import { showToast } from "@/app/_lib/components/Toast";
-import Spinner from "@/app/_lib/components/Spinner";
 import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { showToast } from "@/app/_lib/components/Toast";
+
+import { updateUserApi } from "@/app/_lib/data-services";
+import { useSingleUSer } from "../hooks/useSingleUser";
 import { editUser } from "../slice";
-import { TUsers } from "@/app/_lib/types/types";
+
+import Spinner from "@/app/_lib/components/Spinner";
+import { useRouter } from "next/navigation";
 
 type Props = {
   userId: number;
@@ -20,6 +22,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
 
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   // SINGLE USER
   const { singleUserData } = useSingleUSer(userId);
@@ -27,7 +30,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
   // EDIT
   const { mutate: EditUserMutate, isPending } = useMutation({
     mutationFn: updateUserApi,
-    onSuccess: (data: TUsers) => {
+    onSuccess: () => {
       const updateUser = {
         first_name: editUserName,
         last_name: lastName,
@@ -41,6 +44,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
         queryKey: ["users"],
       });
       onClose();
+      router.push("/user/user-list");
     },
     onError: (err) => showToast("error", err.message),
   });
@@ -120,16 +124,3 @@ export default function EditUserForm({ userId, onClose }: Props) {
     </div>
   );
 }
-
-// onSetAllUserArray(
-//   allUserArray.map((item) => {
-//     if (item.id === userId)
-//       return {
-//         ...item,
-//         first_name: data.name,
-//         last_name: lastName,
-//         email: newEmail,
-//       };
-//     else return item;
-//   })
-// );
