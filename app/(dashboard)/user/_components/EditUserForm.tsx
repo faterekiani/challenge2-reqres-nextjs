@@ -6,6 +6,7 @@ import { showToast } from "@/app/_lib/components/Toast";
 import Spinner from "@/app/_lib/components/Spinner";
 import { useAppDispatch } from "@/app/_lib/store/hooks";
 import { editUser } from "../slice";
+import { TUsers } from "@/app/_lib/types/types";
 
 type Props = {
   userId: number;
@@ -26,9 +27,9 @@ export default function EditUserForm({ userId, onClose }: Props) {
   // EDIT
   const { mutate: EditUserMutate, isPending } = useMutation({
     mutationFn: updateUserApi,
-    onSuccess: (data) => {
+    onSuccess: (data: TUsers) => {
       const updateUser = {
-        first_name: data.name,
+        first_name: editUserName,
         last_name: lastName,
         email: newEmail,
       };

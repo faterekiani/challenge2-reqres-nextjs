@@ -26,7 +26,6 @@ export default function UserTable({ page, size }: SearchParamsType) {
   }, [userData, dispatch]);
 
   const { allDataRedux } = useAppSelector((state) => state.userReducer); //get redux store
-
   console.log(allDataRedux);
 
   if (isLoading)

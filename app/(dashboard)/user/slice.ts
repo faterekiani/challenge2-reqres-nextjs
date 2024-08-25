@@ -33,13 +33,13 @@ const userSlice = createSlice({
       state.allDataRedux.push(action.payload);
     },
     editUser: (state, action) => {
-      const { userId, updatedUserInfo } = action.payload;
-
-      const update = state.allDataRedux.map((user) => {
-        if (user.id === userId) return { ...user, updatedUserInfo };
-        else return user;
-      });
-      state.allDataRedux = update;
+      const { userId, updateUser } = action.payload;
+      return {
+        ...state,
+        allDataRedux: state.allDataRedux.map((user) =>
+          user.id === userId ? { ...user, ...updateUser } : user
+        ),
+      };
     },
   },
 });
