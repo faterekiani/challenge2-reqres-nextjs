@@ -1,9 +1,9 @@
-import { getAllResorcesApi } from "@/app/_lib/data-services";
+import { getAllResorcesApi } from "@/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useGetAllResources(
-  pageNumber: string,
-  pageSize: string
+  pageNumber: number,
+  pageSize: number
 ) {
   const {
     data: resourceData,

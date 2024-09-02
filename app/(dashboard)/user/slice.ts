@@ -1,14 +1,16 @@
-import { TUsers } from "@/app/_lib/types/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { User } from "@/_lib/types/types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type UserState = {
-  allDataRedux: TUsers[]; // Array of User objects
+  // TODO
+  users: User[]; // Array of User objects
   isLoading: boolean;
   error: null | string;
 };
 
 const initialState: UserState = {
-  allDataRedux: [],
+  // TODO - change the name
+  users: [],
   isLoading: false,
   error: null,
 };
@@ -17,27 +19,29 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    // TODO - type action: PayloadAction<string>
     addData: (state, action) => {
-      state.allDataRedux = action.payload;
+      state.users = action.payload;
     },
 
     deleteUser: (state, action) => {
       const userId = action.payload;
-      const filteredData = state.allDataRedux.filter(
-        (user) => user.id !== userId
-      );
-      state.allDataRedux = filteredData;
+      const filteredData = state.users.filter((user) => user.id !== userId);
+      return {
+        ...state,
+        users: filteredData,
+      };
     },
 
     createNewUser: (state, action) => {
-      state.allDataRedux.push(action.payload);
+      state.users.push(action.payload);
     },
 
     editUser: (state, action) => {
       const { userId, updateUser } = action.payload;
       return {
         ...state,
-        allDataRedux: state.allDataRedux.map((user) =>
+        users: state.users.map((user) =>
           user.id === userId ? { ...user, ...updateUser } : user
         ),
       };

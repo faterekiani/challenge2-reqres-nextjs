@@ -2,14 +2,15 @@
 
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useAppDispatch } from "@/app/_lib/store/hooks";
-import { showToast } from "@/app/_lib/components/Toast";
+import { useAppDispatch } from "@/_lib/store/hooks";
+import { showToast } from "@/app/components/Toast";
 
-import { createNewUserApi } from "@/app/_lib/data-services";
-import { TUsers } from "@/app/_lib/types/types";
+import { createNewUserApi } from "@/_lib/data-services";
+import { User } from "@/_lib/types/types";
 import { createNewUser } from "../slice";
 
-import Spinner from "@/app/_lib/components/Spinner";
+import Spinner from "@/app/components/Spinner";
+import Button from "@/app/components/Button";
 
 type Props = {
   onClose: () => void;
@@ -34,7 +35,7 @@ export default function CreateUserForm({ onClose }: Props) {
   // fetch data
   const { mutate: createUserMutate, isPending } = useMutation({
     mutationFn: createNewUserApi,
-    onSuccess: (data: TUsers) => {
+    onSuccess: (data: User) => {
       const newUser = {
         ...data,
         first_name: name,
@@ -107,13 +108,14 @@ export default function CreateUserForm({ onClose }: Props) {
           />
         </div>
 
-        <button
+        <Button
           type="submit"
           disabled={!name || !lastName || !newEmail}
-          className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-32 flex items-center justify-center"
+          variant="primary"
+          isLoading={isPending}
         >
-          {isPending ? <Spinner className="spinner-mini" /> : "Create user"}
-        </button>
+          Create user
+        </Button>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import userReducer from "../../(dashboard)/user/slice";
+import userReducer from "../../app/(dashboard)/user/slice";
 
 export const makeStore = () => {
   const store = configureStore({

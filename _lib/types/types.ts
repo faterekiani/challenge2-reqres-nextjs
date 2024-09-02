@@ -1,11 +1,12 @@
-export type TUserInfo = {
-  data: TUsers[];
+export type UserInfo = {
+  page: number;
+  per_page: number;
   total: number;
-  isSuccess: boolean;
-  errorMessage: string;
+  total_pages: number;
+  data: User[];
 };
 
-export type TUsers = {
+export type User = {
   id: number;
   email: string;
   first_name: string;
@@ -13,7 +14,7 @@ export type TUsers = {
   avatar: string;
 };
 
-export type TResorces = {
+export type Resorce = {
   id: number;
   name: string;
   year: string;
@@ -21,12 +22,12 @@ export type TResorces = {
   pantone_value: string;
 };
 
-export type SearchParamsType = {
-  page: string;
-  size: string;
+export type SearchParams = {
+  page: number;
+  size: number;
 };
 
-export type TNewUser = {
+export type NewUser = {
   name: string;
   job: string;
 };

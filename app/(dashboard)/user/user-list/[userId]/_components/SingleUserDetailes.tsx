@@ -2,8 +2,8 @@
 
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import { useSingleUSer } from "../../../hooks/useSingleUser";
-import Spinner from "@/app/_lib/components/Spinner";
+import { useSingleUSer } from "../../../../../../_lib/hook/useSingleUser";
+import Spinner from "@/app/components/Spinner";
 import EditUserBtn from "../../../_components/EditUserBtn";
 import DeleteUserBtn from "../../../_components/DeleteUserBtn";
 
@@ -17,7 +17,7 @@ export default function SingleUserDetails({ userId }: Props) {
   if (isLoading)
     return (
       <div>
-        <Spinner className="spinner" />
+        <Spinner size="medium" />
       </div>
     );
 
@@ -48,7 +48,7 @@ export default function SingleUserDetails({ userId }: Props) {
       </div>
       <div className="space-x-2 mr-10">
         <EditUserBtn userId={userId} />
-        <DeleteUserBtn userId={userId} />
+        <DeleteUserBtn userId={userId} page={page} size={size} />
       </div>
     </div>
   );

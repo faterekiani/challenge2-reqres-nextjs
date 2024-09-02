@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/app/_lib/store/hooks";
+import { useAppDispatch } from "@/_lib/store/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showToast } from "@/app/_lib/components/Toast";
+import { showToast } from "@/app/components/Toast";
 
-import { updateUserApi } from "@/app/_lib/data-services";
-import { useSingleUSer } from "../hooks/useSingleUser";
+import { updateUserApi } from "@/_lib/data-services";
+import { useSingleUSer } from "../../../../_lib/hook/useSingleUser";
 import { editUser } from "../slice";
 
-import Spinner from "@/app/_lib/components/Spinner";
 import { useRouter } from "next/navigation";
+import Button from "@/app/components/Button";
 
 type Props = {
   userId: number;
@@ -114,12 +114,14 @@ export default function EditUserForm({ userId, onClose }: Props) {
           />
         </div>
 
-        <button
+        <Button
           type="submit"
-          className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-28 flex items-center justify-center"
+          variant="primary"
+          isLoading={isPending}
+          disabled={!editUserName || !lastName || !newEmail}
         >
-          {isPending ? <Spinner className="spinner-mini" /> : "Edit User"}
-        </button>
+          Edit User
+        </Button>
       </form>
     </div>
   );

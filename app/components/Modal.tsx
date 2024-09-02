@@ -16,11 +16,11 @@ const Modal = ({ isOpen, onClose, children }: Props) => {
       }`}
     >
       <div
-        className="bg-white p-8 w-full max-w-[500px] rounded-md"
+        className="bg-white px-6 pb-6 pt-4 w-full max-w-[500px] rounded-md"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end cursor-pointer" onClick={onClose}>
-          <X />
+          <X size={17} />
         </div>
         {children}
       </div>

@@ -3,12 +3,12 @@ import {
   RESOURCE_API_URL,
   REGISTER_API_URL,
   USER_API_URL,
-} from "@/app/_lib/constant";
+} from "@/_lib/constant";
 
 // USER
 
 // All Users
-export async function getAllUsersInfoApi(pageNumber: string, pageSize: string) {
+export async function getAllUsersInfoApi(pageNumber: number, pageSize: number) {
   const res = await fetch(
     `${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`
   );
@@ -106,7 +106,7 @@ export async function updateUserApi({ userId, name, job }: Props) {
 // RESOURCE
 
 // Recource List
-export async function getAllResorcesApi(pageNumber: string, pageSize: string) {
+export async function getAllResorcesApi(pageNumber: number, pageSize: number) {
   const res = await fetch(
     `${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`
   );

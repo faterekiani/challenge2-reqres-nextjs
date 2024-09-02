@@ -1,8 +1,8 @@
-import { TResorces } from "@/app/_lib/types/types";
+import { Resorce } from "@/_lib/types/types";
 import Link from "next/link";
 
 type Props = {
-  resourceInfos: TResorces;
+  resourceInfos: Resorce;
 };
 
 export default function ResourceTableItems({ resourceInfos }: Props) {

@@ -12,14 +12,11 @@
     border-right-color: theme("colors.primary.200");
     animation: rotate 1s infinite linear;
   }
-  .spinner-mini {
+  .spinner.small {
     margin: 0;
     width: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
     border: 2px solid theme("colors.white");
     border-right-color: transparent;
-    animation: rotate 1s infinite linear;
   }
 
   @keyframes rotate {

@@ -2,17 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { SearchParamsType, TUsers } from "@/app/_lib/types/types";
 
-import { useUsers } from "../hooks/useUser";
-import Spinner from "../../../_lib/components/Spinner";
+import { useUsers } from "../../../../_lib/hook/useUser";
+import Spinner from "../../../components/Spinner";
 import UserTableItems from "./UserTableItems";
 import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
-import { useAppDispatch, useAppSelector } from "@/app/_lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/_lib/store/hooks";
 import { addData } from "../slice";
+import { SearchParams, User } from "@/_lib/types/types";
 
-export default function UserTable({ page, size }: SearchParamsType) {
+export default function UserTable({ page, size }: SearchParams) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -25,18 +25,17 @@ export default function UserTable({ page, size }: SearchParamsType) {
     }
   }, [userData, dispatch]);
 
-  const { allDataRedux } = useAppSelector((state) => state.userReducer); //get redux store
-  console.log(allDataRedux);
+  const { users } = useAppSelector((state) => state.userReducer); //get redux store
 
   if (isLoading)
     return (
       <div>
-        <Spinner className="spinner" />
+        <Spinner size="medium" />
       </div>
     );
 
-  const handlePageChange = (newPage: string) => {
-    router.push(`?page=${newPage}`);
+  const handlePageChange = (newPage: number, newSize: number) => {
+    router.push(`?page=${newPage}&size=${newSize}`);
   };
 
   return (
@@ -70,8 +69,13 @@ export default function UserTable({ page, size }: SearchParamsType) {
           </tr>
         </thead>
         <tbody>
-          {allDataRedux?.map((userInfo: TUsers) => (
-            <UserTableItems key={userInfo.id} userInfo={userInfo} />
+          {users?.map((userInfo: User) => (
+            <UserTableItems
+              key={userInfo.id}
+              userInfo={userInfo}
+              page={page}
+              size={size}
+            />
           ))}
         </tbody>
       </table>

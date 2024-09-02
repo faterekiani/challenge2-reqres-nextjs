@@ -2,11 +2,11 @@
 
 import { Folder, User } from "lucide-react";
 import TotalStat from "./TotalStat";
-import { useUsers } from "../user/hooks/useUser";
-import { SearchParamsType } from "@/app/_lib/types/types";
-import useGetAllResources from "../resource/_components/useGetAllResources";
+import { useUsers } from "../../../_lib/hook/useUser";
+import { SearchParams } from "@/_lib/types/types";
+import useGetAllResources from "../../../_lib/hook/useGetAllResources";
 
-export default function TotalStats({ page, size }: SearchParamsType) {
+export default function TotalStats({ page, size }: SearchParams) {
   const { userData, isLoading: isLoadingUser } = useUsers(page, size);
 
   const { resourceData, isLoading: isLoadingResource } = useGetAllResources(

@@ -1,10 +1,11 @@
 "use client";
 
-import { setCookie } from "@/app/_lib/auth/action";
-import Spinner from "@/app/_lib/components/Spinner";
-import { showToast } from "@/app/_lib/components/Toast";
-import { loginUserApi } from "@/app/_lib/data-services";
+import { setCookie } from "@/_lib/auth/action";
+import Spinner from "@/app/components/Spinner";
+import { showToast } from "@/app/components/Toast";
+import { loginUserApi } from "@/_lib/data-services";
 import { useMutation } from "@tanstack/react-query";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -38,8 +39,7 @@ export default function LoginForm() {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-gray-700
-text-sm font-bold mb-2"
+              className="block text-gray-700 text-sm font-bold mb-2"
             >
               Email
             </label>
@@ -51,7 +51,7 @@ text-sm font-bold mb-2"
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-8">
             <label
               htmlFor="password"
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -70,11 +70,21 @@ text-sm font-bold mb-2"
           <button
             type="submit"
             disabled={!email || !password}
-            className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded  mt-2 transition-all w-28 flex items-center justify-center"
+            className="bg-primary-950 hover:bg-primary-700 disabled:bg-slate-400 text-white font-bold py-2 px-4 rounded transition-all w-full flex items-center justify-center"
           >
-            {isPending ? <Spinner className="spinner-mini" /> : "Login"}
+            {isPending ? <Spinner size="small" /> : "Login"}
           </button>
         </form>
+        <div className="flex items-center justify-center gap-2 mt-4 text-xs">
+          <p>Don&apos;t have an acoount?</p>
+
+          <Link
+            href="/register"
+            className="text-primary-950 transition-all hover:underline"
+          >
+            Register now
+          </Link>
+        </div>
       </div>
     </div>
   );
