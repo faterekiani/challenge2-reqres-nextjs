@@ -52,7 +52,6 @@ export default function EditUserForm({ userId, onClose }: Props) {
   useEffect(() => {
     if (singleUserData) {
       setEditUserName(singleUserData.data.first_name);
-      setEditUserJob(singleUserData.data.job);
       setLastName(singleUserData.data.last_name);
       setNewEmail(singleUserData.data.email);
     }

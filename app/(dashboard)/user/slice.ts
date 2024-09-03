@@ -1,15 +1,13 @@
-import { User } from "@/_lib/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { NewUser, UpdateUserPayload, User } from "./_types/type";
 
 type UserState = {
-  // TODO
   users: User[]; // Array of User objects
   isLoading: boolean;
   error: null | string;
 };
 
 const initialState: UserState = {
-  // TODO - change the name
   users: [],
   isLoading: false,
   error: null,
@@ -20,11 +18,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     // TODO - type action: PayloadAction<string>
-    addData: (state, action) => {
+    addData: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
     },
 
-    deleteUser: (state, action) => {
+    deleteUser: (state, action: PayloadAction<number>) => {
       const userId = action.payload;
       const filteredData = state.users.filter((user) => user.id !== userId);
       return {
@@ -33,11 +31,11 @@ const userSlice = createSlice({
       };
     },
 
-    createNewUser: (state, action) => {
+    createNewUser: (state, action: PayloadAction<NewUser>) => {
       state.users.push(action.payload);
     },
 
-    editUser: (state, action) => {
+    editUser: (state, action: PayloadAction<UpdateUserPayload>) => {
       const { userId, updateUser } = action.payload;
       return {
         ...state,

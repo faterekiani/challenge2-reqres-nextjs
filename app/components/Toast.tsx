@@ -8,16 +8,15 @@ interface ToastProviderProps {
   children: React.ReactNode;
 }
 
-export default function ToastProvider({ children }: ToastProviderProps) {
-  const contextClass = {
-    success: "bg-green-600",
-    error: "bg-red-600",
-    info: "bg-gray-600",
-    warning: "bg-orange-400",
-    default: "bg-indigo-600",
-    dark: "bg-white-600 font-gray-300",
-  };
+const contextClass = {
+  success: "bg-green-600",
+  error: "bg-red-600",
+  info: "bg-gray-600",
+  warning: "bg-orange-400",
+  default: "bg-indigo-600",
+};
 
+export default function ToastProvider({ children }: ToastProviderProps) {
   return (
     <>
       {children}
@@ -44,27 +43,12 @@ export const defaultToastOptions: ToastOptions = {
   transition: Slide,
 };
 
-type ToastType = "success" | "error" | "info" | "warning" | "default";
+type ToastType = "success" | "error" | "default";
 
 export const showToast = (
   type: ToastType,
   content: ToastContent,
   options: Partial<ToastOptions> = {}
 ): Id => {
-  const optionsToApply = { ...defaultToastOptions, ...options };
-
-  switch (type) {
-    case "success":
-      return toast.success(content, optionsToApply);
-    case "error":
-      return toast.error(content, optionsToApply);
-    case "info":
-      return toast.info(content, optionsToApply);
-    case "warning":
-      return toast.warn(content, optionsToApply);
-    case "default":
-      return toast(content, optionsToApply);
-    default:
-      return toast(content, optionsToApply);
-  }
+  return toast(content, { type, ...defaultToastOptions, ...options });
 };

@@ -13,12 +13,20 @@ import Pagination from "../../_components/Pagination";
 export default function ResourceTable({ page, size }: SearchParams) {
   const router = useRouter();
 
-  const { data: resourceData, isLoading } = useQuery({
+  const {
+    data: resourceData,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["resource", page, size],
     queryFn: () => getAllResorcesApi(page, size),
   });
 
   if (isLoading) return <Spinner size="medium" />;
+
+  if (error) {
+    return <div>Error fetching resources: {error.message}</div>;
+  }
 
   const handlePageChange = (newPage: number, newSize: number) => {
     router.push(`?page=${newPage}&size=${newSize}`);
@@ -39,7 +47,7 @@ export default function ResourceTable({ page, size }: SearchParams) {
           </tr>
         </thead>
         <tbody>
-          {resourceData?.data?.map((resourceInfos: Resorce) => (
+          {resourceData?.data.map((resourceInfos: Resorce) => (
             <ResourceTableItems
               key={resourceInfos.id}
               resourceInfos={resourceInfos}

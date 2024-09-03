@@ -4,6 +4,7 @@ import { Ellipsis } from "lucide-react";
 import EditUserBtn from "./EditUserBtn";
 import defaultImage from "../../../../public/default.jpg";
 import { User } from "@/_lib/types/types";
+import Link from "next/link";
 
 type Props = {
   userInfo: User;
@@ -49,12 +50,12 @@ export default function UserTableItems({ userInfo, page, size }: Props) {
 
         <DeleteUserBtn userId={userId} page={page} size={size} />
 
-        {/* <Link href={`/user/user-list/${userInfo.id}`}>
-            <Ellipsis
-              size={15}
-              className="hover:text-secondary transition-colors"
-            />
-          </Link> */}
+        <Link href={`/user/user-list/${userInfo.id}`}>
+          <Ellipsis
+            size={15}
+            className="hover:text-secondary transition-colors"
+          />
+        </Link>
       </td>
     </tr>
   );

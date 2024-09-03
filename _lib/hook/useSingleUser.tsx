@@ -1,7 +1,6 @@
 import { getSingleUserInfoApi } from "@/_lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 
-// TODO- take it to the lib folder
 export function useSingleUSer(userId: number) {
   const {
     data: singleUserData,
@@ -13,5 +12,5 @@ export function useSingleUSer(userId: number) {
     queryFn: () => getSingleUserInfoApi(userId),
   });
 
-  return { isLoading, singleUserData, isError, error };
+  return { isLoading, singleUserData };
 }

@@ -1,17 +1,18 @@
-import SingleResourceDetailes from "../../_components/SingleResourceDetailes";
+import SingleResourceDetailes from "./_component/SIngleResourceDetailes";
 
-type TResourcePageParams = {
+type ResourcePageParams = {
   resourceId: number;
 };
+
 export async function generateMetadata({
   params,
 }: {
-  params: TResourcePageParams;
+  params: ResourcePageParams;
 }) {
   return { title: `Resource ${params.resourceId}` };
 }
 
-export default function Page({ params }: { params: TResourcePageParams }) {
+export default function Page({ params }: { params: ResourcePageParams }) {
   const { resourceId } = params;
 
   return (

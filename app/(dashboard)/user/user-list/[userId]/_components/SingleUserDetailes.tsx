@@ -14,12 +14,7 @@ type Props = {
 export default function SingleUserDetails({ userId }: Props) {
   const { singleUserData, isLoading } = useSingleUSer(userId);
 
-  if (isLoading)
-    return (
-      <div>
-        <Spinner size="medium" />
-      </div>
-    );
+  if (isLoading) return <Spinner size="medium" />;
 
   if (!singleUserData) return null;
 
@@ -48,7 +43,7 @@ export default function SingleUserDetails({ userId }: Props) {
       </div>
       <div className="space-x-2 mr-10">
         <EditUserBtn userId={userId} />
-        <DeleteUserBtn userId={userId} page={page} size={size} />
+        {/* <DeleteUserBtn userId={userId} page={page} size={size} /> */}
       </div>
     </div>
   );

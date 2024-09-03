@@ -5,10 +5,27 @@ import {
   USER_API_URL,
 } from "@/_lib/constant";
 
+import {
+  CreateNewUser,
+  PaginationParams,
+  RegisterUserApiArgs,
+  UpdateUser,
+  loginUserApiArgs,
+} from "./types/types";
+
+import {
+  ResourcesInfo,
+  singleResorce,
+} from "@/app/(dashboard)/resource/_types/type";
+
+import { UsersInfo, singleUser } from "@/app/(dashboard)/user/_types/type";
+
 // USER
 
-// All Users
-export async function getAllUsersInfoApi(pageNumber: number, pageSize: number) {
+export async function getAllUsersInfoApi({
+  pageNumber,
+  pageSize,
+}: PaginationParams) {
   const res = await fetch(
     `${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`
   );
@@ -17,12 +34,11 @@ export async function getAllUsersInfoApi(pageNumber: number, pageSize: number) {
     throw new Error("Network response was not ok");
   }
 
-  const data = await res.json();
+  const data: UsersInfo = await res.json();
 
   return data;
 }
 
-// Single Users
 export async function getSingleUserInfoApi(userId: number) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`);
 
@@ -30,19 +46,12 @@ export async function getSingleUserInfoApi(userId: number) {
     throw new Error("Network response was not ok");
   }
 
-  const data = await res.json();
+  const data: singleUser = await res.json();
 
   return data;
 }
 
-// Create User
-export async function createNewUserApi({
-  job,
-  name,
-}: {
-  job: string;
-  name: string;
-}) {
+export async function createNewUserApi({ job, name }: CreateNewUser) {
   const res = await fetch(`${USER_API_URL}/users`, {
     method: "POST",
     headers: {
@@ -58,7 +67,6 @@ export async function createNewUserApi({
   return data;
 }
 
-// Delete Users
 export async function deleteUserApi(userId: number) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`, {
     method: "DELETE",
@@ -73,14 +81,7 @@ export async function deleteUserApi(userId: number) {
   return res;
 }
 
-type Props = {
-  userId: number;
-  name: string;
-  job: string;
-};
-
-// Update User
-export async function updateUserApi({ userId, name, job }: Props) {
+export async function updateUserApi({ userId, name, job }: UpdateUser) {
   const res = await fetch(`${USER_API_URL}/users/${userId}`, {
     method: "PUT",
     headers: {
@@ -102,11 +103,12 @@ export async function updateUserApi({ userId, name, job }: Props) {
   return data;
 }
 
-//////////////////////////////////////////////////////////
 // RESOURCE
 
-// Recource List
-export async function getAllResorcesApi(pageNumber: number, pageSize: number) {
+export async function getAllResorcesApi({
+  pageNumber,
+  pageSize,
+}: PaginationParams) {
   const res = await fetch(
     `${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`
   );
@@ -115,11 +117,10 @@ export async function getAllResorcesApi(pageNumber: number, pageSize: number) {
     throw new Error("Network response was not ok");
   }
 
-  const data = await res.json();
+  const data: ResourcesInfo = await res.json();
   return data;
 }
 
-// Single resource
 export async function getSingleResourceInfoApi(resourceId: number) {
   const res = await fetch(`${RESOURCE_API_URL}/${resourceId}`);
 
@@ -127,22 +128,14 @@ export async function getSingleResourceInfoApi(resourceId: number) {
     throw new Error("Network response was not ok");
   }
 
-  const data = await res.json();
+  const data: singleResorce = await res.json();
 
   return data;
 }
 
-//////////////////////////////////////////////////////////
 // AUTH
 
-// login
-export async function loginUserApi({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) {
+export async function loginUserApi({ email, password }: loginUserApiArgs) {
   const response = await fetch(LOGIN_API_URL, {
     method: "POST",
     headers: {
@@ -163,14 +156,10 @@ export async function loginUserApi({
   return data;
 }
 
-// Register
 export async function registerUserApi({
   email,
   password,
-}: {
-  email: string;
-  password: string;
-}) {
+}: RegisterUserApiArgs) {
   const response = await fetch(REGISTER_API_URL, {
     method: "POST",
     headers: {

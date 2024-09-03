@@ -15,6 +15,7 @@ import Button from "@/app/components/Button";
 type Props = {
   onClose: () => void;
 };
+
 export default function CreateUserForm({ onClose }: Props) {
   const [formData, setFormData] = useState({
     name: "",

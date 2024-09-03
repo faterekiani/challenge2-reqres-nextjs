@@ -10,13 +10,14 @@ import Pagination from "../../_components/Pagination";
 import CreateUserBtn from "./CreateUserBtn";
 import { useAppDispatch, useAppSelector } from "@/_lib/store/hooks";
 import { addData } from "../slice";
-import { SearchParams, User } from "@/_lib/types/types";
+import { SearchParams } from "@/_lib/types/types";
+import { User } from "../_types/type";
 
 export default function UserTable({ page, size }: SearchParams) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { isLoading, userData } = useUsers(page, size); //get all users
+  const { isLoading, userData } = useUsers(page, size);
 
   // set all users in the redux store
   useEffect(() => {
