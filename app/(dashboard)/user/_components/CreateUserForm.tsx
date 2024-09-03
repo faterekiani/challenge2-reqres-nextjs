@@ -6,11 +6,11 @@ import { useAppDispatch } from "@/_lib/store/hooks";
 import { showToast } from "@/app/components/Toast";
 
 import { createNewUserApi } from "@/_lib/data-services";
-import { User } from "@/_lib/types/types";
 import { createNewUser } from "../slice";
 
 import Spinner from "@/app/components/Spinner";
 import Button from "@/app/components/Button";
+import { User } from "../_types/type";
 
 type Props = {
   onClose: () => void;

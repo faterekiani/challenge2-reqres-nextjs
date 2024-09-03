@@ -12,4 +12,4 @@ const apiRoutes = {
   register: "/register",
 };
 
-fetch(baseUrl + route);
+// fetch(baseUrl + route);
