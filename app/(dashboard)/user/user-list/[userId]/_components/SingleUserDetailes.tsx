@@ -8,43 +8,45 @@ import EditUserBtn from "../../../_components/EditUserBtn";
 import DeleteUserBtn from "../../../_components/DeleteUserBtn";
 
 type Props = {
-  userId: number;
+	userId: number;
+	page: number;
+	size: number;
 };
 
-export default function SingleUserDetails({ userId }: Props) {
-  const { singleUserData, isLoading } = useSingleUSer(userId);
+export default function SingleUserDetails({ userId, page, size }: Props) {
+	const { singleUserData, isLoading } = useSingleUSer(userId);
 
-  if (isLoading) return <Spinner size="medium" />;
+	if (isLoading) return <Spinner size="medium" />;
 
-  if (!singleUserData) return null;
+	if (!singleUserData) return null;
 
-  const { id, avatar, last_name, first_name, email } = singleUserData?.data;
+	const { avatar, last_name, first_name, email } = singleUserData?.data;
 
-  return (
-    <div className="flex flex-col items-center md:justify-between md:flex-row  gap-6 pb-4  md:border-b-[1px] md:border-indigo-300 px-8">
-      <div className="flex items-center gap-8">
-        <div className="relative size-28">
-          <Image
-            src={avatar}
-            alt={avatar}
-            fill
-            className="object-cover rounded-full"
-          />
-        </div>
-        <div className="flex flex-col gap-y-2 items-start text-secondary">
-          <div className="font-bold text-3xl space-x-2">
-            <span>{last_name}</span>
-            <span>{first_name}</span>
-          </div>
-          <h2 className="flex items-center justify-between gap-2 text-sm">
-            <Mail size={15} /> {email}
-          </h2>
-        </div>
-      </div>
-      <div className="space-x-2 mr-10">
-        <EditUserBtn userId={userId} />
-        {/* <DeleteUserBtn userId={userId} page={page} size={size} /> */}
-      </div>
-    </div>
-  );
+	return (
+		<div className="flex flex-col items-center md:justify-between md:flex-row  gap-6 pb-4  md:border-b-[1px] md:border-indigo-300 px-8">
+			<div className="flex items-center gap-8">
+				<div className="relative size-28">
+					<Image
+						src={avatar}
+						alt={avatar}
+						fill
+						className="object-cover rounded-full"
+					/>
+				</div>
+				<div className="flex flex-col gap-y-2 items-start text-secondary">
+					<div className="font-bold text-3xl space-x-2">
+						<span>{last_name}</span>
+						<span>{first_name}</span>
+					</div>
+					<h2 className="flex items-center justify-between gap-2 text-sm">
+						<Mail size={15} /> {email}
+					</h2>
+				</div>
+			</div>
+			<div className="space-x-2 mr-10">
+				<EditUserBtn userId={userId} />
+				<DeleteUserBtn userId={userId} page={page} size={size} />
+			</div>
+		</div>
+	);
 }

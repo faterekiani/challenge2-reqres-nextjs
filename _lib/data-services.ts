@@ -1,181 +1,178 @@
 import {
-  LOGIN_API_URL,
-  RESOURCE_API_URL,
-  REGISTER_API_URL,
-  USER_API_URL,
+	LOGIN_API_URL,
+	RESOURCE_API_URL,
+	REGISTER_API_URL,
+	USER_API_URL,
 } from "@/_lib/constant";
 
 import {
-  CreateNewUser,
-  PaginationParams,
-  RegisterUserApiArgs,
-  UpdateUser,
-  loginUserApiArgs,
+	CreateNewUser,
+	PaginationParams,
+	RegisterUserApiArgs,
+	UpdateUser,
+	loginUserApiArgs,
 } from "./types/types";
 
 import {
-  ResourcesInfo,
-  singleResorce,
+	ResourcesInfo,
+	singleResorce,
 } from "@/app/(dashboard)/resource/_types/type";
 
 import { UsersInfo, singleUser } from "@/app/(dashboard)/user/_types/type";
 
 // USER
 
-export async function getAllUsersInfoApi({
-  pageNumber,
-  pageSize,
-}: PaginationParams) {
-  const res = await fetch(
-    `${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`
-  );
+export async function getAllUsersInfoApi(paginationParams: PaginationParams) {
+	const { pageNumber, pageSize } = paginationParams;
 
-  if (!res.ok) {
-    throw new Error("Network response was not ok");
-  }
+	const res = await fetch(
+		`${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`,
+	);
 
-  const data: UsersInfo = await res.json();
+	if (!res.ok) {
+		throw new Error("Network response was not ok");
+	}
 
-  return data;
+	const data: UsersInfo = await res.json();
+
+	return data;
 }
 
 export async function getSingleUserInfoApi(userId: number) {
-  const res = await fetch(`${USER_API_URL}/users/${userId}`);
+	const res = await fetch(`${USER_API_URL}/users/${userId}`);
 
-  if (!res.ok) {
-    throw new Error("Network response was not ok");
-  }
+	if (!res.ok) {
+		throw new Error("Network response was not ok");
+	}
 
-  const data: singleUser = await res.json();
+	const data: singleUser = await res.json();
 
-  return data;
+	return data;
 }
 
 export async function createNewUserApi({ job, name }: CreateNewUser) {
-  const res = await fetch(`${USER_API_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ job, name }),
-  });
-  if (!res.ok) {
-    throw new Error("user could not be created");
-  }
-  const data = await res.json();
+	const res = await fetch(`${USER_API_URL}/users`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ job, name }),
+	});
+	if (!res.ok) {
+		throw new Error("user could not be created");
+	}
+	const data = await res.json();
 
-  return data;
+	return data;
 }
 
 export async function deleteUserApi(userId: number) {
-  const res = await fetch(`${USER_API_URL}/users/${userId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
-    throw new Error("User could not be deleted");
-  }
+	const res = await fetch(`${USER_API_URL}/users/${userId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	if (!res.ok) {
+		throw new Error("User could not be deleted");
+	}
 
-  return res;
+	return res;
 }
 
 export async function updateUserApi({ userId, name, job }: UpdateUser) {
-  const res = await fetch(`${USER_API_URL}/users/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      job,
-      // name: "morpheus",
-      // email: "zion resident",
-    }),
-  });
+	const res = await fetch(`${USER_API_URL}/users/${userId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			name,
+			job,
+		}),
+	});
 
-  if (!res.ok) {
-    throw new Error("Error updating user");
-  }
+	if (!res.ok) {
+		throw new Error("Error updating user");
+	}
 
-  const data = await res.json();
-  return data;
+	const data = await res.json();
+	return data;
 }
 
 // RESOURCE
 
 export async function getAllResorcesApi({
-  pageNumber,
-  pageSize,
+	pageNumber,
+	pageSize,
 }: PaginationParams) {
-  const res = await fetch(
-    `${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`
-  );
+	const res = await fetch(
+		`${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`,
+	);
 
-  if (!res.ok) {
-    throw new Error("Network response was not ok");
-  }
+	if (!res.ok) {
+		throw new Error("Network response was not ok");
+	}
 
-  const data: ResourcesInfo = await res.json();
-  return data;
+	const data: ResourcesInfo = await res.json();
+	return data;
 }
 
 export async function getSingleResourceInfoApi(resourceId: number) {
-  const res = await fetch(`${RESOURCE_API_URL}/${resourceId}`);
+	const res = await fetch(`${RESOURCE_API_URL}/${resourceId}`);
 
-  if (!res.ok) {
-    throw new Error("Network response was not ok");
-  }
+	if (!res.ok) {
+		throw new Error("Network response was not ok");
+	}
 
-  const data: singleResorce = await res.json();
+	const data: singleResorce = await res.json();
 
-  return data;
+	return data;
 }
 
 // AUTH
 
 export async function loginUserApi({ email, password }: loginUserApiArgs) {
-  const response = await fetch(LOGIN_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
+	const response = await fetch(LOGIN_API_URL, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email,
+			password,
+		}),
+	});
 
-  if (!response.ok) {
-    throw new Error("Login failed");
-  }
+	if (!response.ok) {
+		throw new Error("Login failed");
+	}
 
-  const data = await response.json();
+	const data = await response.json();
 
-  return data;
+	return data;
 }
 
 export async function registerUserApi({
-  email,
-  password,
+	email,
+	password,
 }: RegisterUserApiArgs) {
-  const response = await fetch(REGISTER_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
+	const response = await fetch(REGISTER_API_URL, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			email,
+			password,
+		}),
+	});
 
-  if (!response.ok) {
-    throw new Error("Registration  failed");
-  }
+	if (!response.ok) {
+		throw new Error("Registration  failed");
+	}
 
-  const data = await response.json();
+	const data = await response.json();
 
-  return data;
+	return data;
 }
