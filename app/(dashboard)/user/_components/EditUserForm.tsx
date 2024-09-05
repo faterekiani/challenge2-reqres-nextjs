@@ -9,11 +9,13 @@ import { editUser } from "../slice";
 
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
+import apiRoutes from "@/_lib/constants";
 
 type Props = {
 	userId: number;
 	onClose: () => void;
 };
+
 export default function EditUserForm({ userId, onClose }: Props) {
 	const [editUserName, setEditUserName] = useState("");
 	const [editUserJob] = useState("");
@@ -44,7 +46,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
 				queryKey: ["users"],
 			});
 			onClose();
-			router.push("/user/user-list");
+			router.push(apiRoutes.user + apiRoutes.userList);
 		},
 		onError: (err) => showToast("error", err.message),
 	});

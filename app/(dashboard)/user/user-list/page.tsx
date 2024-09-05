@@ -5,16 +5,16 @@ import { SearchParams } from "@/_lib/types/types";
 
 // meatdata
 export const metadata = {
-  title: "User list",
+	title: "User list",
 };
 
 export default function Page({ searchParams }: { searchParams: SearchParams }) {
-  const pageCount = searchParams?.page || 1;
-  const pageSize = searchParams?.size || 6;
+	const pageCount = searchParams?.page || 1;
+	const pageSize = searchParams?.size || 6;
 
-  return (
-    <Suspense fallback={<Spinner size="medium" />}>
-      <UserTable page={pageCount} size={pageSize} />
-    </Suspense>
-  );
+	return (
+		<Suspense fallback={<Spinner size="medium" />}>
+			<UserTable page={pageCount} size={pageSize} />
+		</Suspense>
+	);
 }

@@ -9,13 +9,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Modal from "@/app/components/Modal";
 import Button from "@/app/components/Button";
+import apiRoutes from "@/_lib/constants";
 
 type Props = {
 	userId: number;
-	page: number;
-	size: number;
+	// page: number;
+	// size: number;
 };
-export default function DeleteUserBtn({ userId, page, size }: Props) {
+export default function DeleteUserBtn({ userId }: Props) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const queryClient = useQueryClient();
@@ -30,21 +31,21 @@ export default function DeleteUserBtn({ userId, page, size }: Props) {
 			setIsModalOpen(false);
 			dispatch(deleteUser(userId)); // update the state
 
-			const nextPage = await queryClient.fetchQuery({
-				queryKey: ["users", { page: page + 1 }],
-				queryFn: () =>
-					getAllUsersInfoApi({ pageNumber: page + 1, pageSize: size }),
-				// staleTime: Infinity,
-			});
+			// const nextPage = await queryClient.fetchQuery({
+			// 	queryKey: ["users", { page: page + 1 }],
+			// 	queryFn: () =>
+			// 		getAllUsersInfoApi({ pageNumber: page + 1, pageSize: size }),
+			// 	// staleTime: Infinity,
+			// });
 
-			console.log("next", nextPage);
+			// console.log("next", nextPage);
 
 			showToast("success", "user successfully deleted");
 			queryClient.invalidateQueries({
 				queryKey: ["users"],
 			});
 
-			router.push("/user/user-list");
+			router.push(apiRoutes.user + apiRoutes.userList);
 		},
 		onError: (err) => showToast("error", err.message),
 	});

@@ -1,38 +1,15 @@
-import React from "react";
+import { LoaderCircle } from "lucide-react";
 
 type Props = {
-  size?: "small" | "medium";
+	size: "small" | "medium";
 };
 
-function Spinner({ size = "medium" }: Props) {
-  return <div className={`spinner ${size}`} />;
-}
+const Loader = ({ size }: Props) => {
+	const style =
+		size === "small"
+			? "text-white w-[20px]"
+			: "w-[60px] text-primary-950 mx-auto my-10 ";
+	return <LoaderCircle size={size} className={`animate-spin ${style}`} />;
+};
 
-export default Spinner;
-
-// import React from "react";
-
-// type Props = {
-//   size?: "small" | "medium";
-// };
-
-// function Spinner({ size = "medium" }: Props) {
-//   const spinnerClasses = `spinner ${size}`;
-//   const spinnerStyles = {
-//     margin: size === "small" ? "0" : "3.2rem auto 1.6rem",
-//     width: size === "small" ? "20px" : "60px",
-//     aspectRatio: 1,
-//     borderRadius: "50%",
-//     border:
-//       size === "small"
-//         ? "2px solid theme('colors.white')"
-//         : "8px solid theme('colors.primary.900')",
-//     borderRightColor:
-//       size === "small" ? "transparent" : "theme('colors.primary.200')",
-//     animation: "rotate 1s infinite linear",
-//   };
-
-//   return <div className={spinnerClasses} style={spinnerStyles} />;
-// }
-
-// export default Spinner;
+export default Loader;

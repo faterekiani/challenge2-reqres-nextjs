@@ -1,9 +1,4 @@
-import {
-	LOGIN_API_URL,
-	RESOURCE_API_URL,
-	REGISTER_API_URL,
-	USER_API_URL,
-} from "@/_lib/constant";
+import apiRoutes, { baseUrl } from "@/_lib/constants";
 
 import {
 	CreateNewUser,
@@ -26,7 +21,7 @@ export async function getAllUsersInfoApi(paginationParams: PaginationParams) {
 	const { pageNumber, pageSize } = paginationParams;
 
 	const res = await fetch(
-		`${USER_API_URL}/users?page=${pageNumber}&per_page=${pageSize}`,
+		`${baseUrl + apiRoutes.users}?page=${pageNumber}&per_page=${pageSize}`,
 	);
 
 	if (!res.ok) {
@@ -39,7 +34,7 @@ export async function getAllUsersInfoApi(paginationParams: PaginationParams) {
 }
 
 export async function getSingleUserInfoApi(userId: number) {
-	const res = await fetch(`${USER_API_URL}/users/${userId}`);
+	const res = await fetch(`${baseUrl + apiRoutes.users}/${userId}`);
 
 	if (!res.ok) {
 		throw new Error("Network response was not ok");
@@ -51,7 +46,7 @@ export async function getSingleUserInfoApi(userId: number) {
 }
 
 export async function createNewUserApi({ job, name }: CreateNewUser) {
-	const res = await fetch(`${USER_API_URL}/users`, {
+	const res = await fetch(`${baseUrl + apiRoutes.users}`, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -67,7 +62,7 @@ export async function createNewUserApi({ job, name }: CreateNewUser) {
 }
 
 export async function deleteUserApi(userId: number) {
-	const res = await fetch(`${USER_API_URL}/users/${userId}`, {
+	const res = await fetch(`${baseUrl + apiRoutes.users}/${userId}`, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
@@ -81,7 +76,7 @@ export async function deleteUserApi(userId: number) {
 }
 
 export async function updateUserApi({ userId, name, job }: UpdateUser) {
-	const res = await fetch(`${USER_API_URL}/users/${userId}`, {
+	const res = await fetch(`${baseUrl + apiRoutes.users}/${userId}`, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -107,7 +102,7 @@ export async function getAllResorcesApi({
 	pageSize,
 }: PaginationParams) {
 	const res = await fetch(
-		`${RESOURCE_API_URL}?page=${pageNumber}&per_page=${pageSize}`,
+		`${baseUrl + apiRoutes.resource}?page=${pageNumber}&per_page=${pageSize}`,
 	);
 
 	if (!res.ok) {
@@ -119,7 +114,7 @@ export async function getAllResorcesApi({
 }
 
 export async function getSingleResourceInfoApi(resourceId: number) {
-	const res = await fetch(`${RESOURCE_API_URL}/${resourceId}`);
+	const res = await fetch(`${baseUrl + apiRoutes.resource}/${resourceId}`);
 
 	if (!res.ok) {
 		throw new Error("Network response was not ok");
@@ -133,7 +128,7 @@ export async function getSingleResourceInfoApi(resourceId: number) {
 // AUTH
 
 export async function loginUserApi({ email, password }: loginUserApiArgs) {
-	const response = await fetch(LOGIN_API_URL, {
+	const response = await fetch(baseUrl + apiRoutes.Login, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -157,7 +152,7 @@ export async function registerUserApi({
 	email,
 	password,
 }: RegisterUserApiArgs) {
-	const response = await fetch(REGISTER_API_URL, {
+	const response = await fetch(baseUrl + apiRoutes.register, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

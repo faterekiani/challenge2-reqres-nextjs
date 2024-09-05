@@ -11,6 +11,7 @@ export function useUsers({ pageNumber, pageSize }: Props) {
 		isLoading,
 		data: userData,
 		error,
+		isFetching,
 	} = useQuery({
 		queryKey: ["users", pageNumber, pageSize],
 		queryFn: () =>
@@ -20,5 +21,5 @@ export function useUsers({ pageNumber, pageSize }: Props) {
 			}),
 	});
 
-	return { isLoading, error, userData };
+	return { isLoading, error, userData, isFetching };
 }
