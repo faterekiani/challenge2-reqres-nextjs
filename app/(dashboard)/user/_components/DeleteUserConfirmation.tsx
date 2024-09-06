@@ -13,9 +13,8 @@ import apiRoutes from "@/_lib/constants";
 
 type Props = {
 	userId: number;
-	// page: number;
-	// size: number;
 };
+
 export default function DeleteUserConfirmation({ userId }: Props) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 

@@ -82,7 +82,7 @@ export default function UserTable({ page, size }: SearchParams) {
 		[],
 	);
 
-	const { isLoading, userData } = useUsers({
+	const { isLoading, userData, isFetching } = useUsers({
 		pageNumber: page,
 		pageSize: size,
 	});
@@ -92,7 +92,7 @@ export default function UserTable({ page, size }: SearchParams) {
 		if (userData) {
 			dispatch(addData(userData?.data));
 		}
-	}, [userData, dispatch]);
+	}, [userData, dispatch, isFetching, isLoading]);
 
 	const { users } = useAppSelector((state) => state.userReducer); //get redux store
 
