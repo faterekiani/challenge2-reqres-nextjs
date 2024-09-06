@@ -58,7 +58,6 @@ export default function UsersList({ page, size }: SearchParams) {
 				header: "Email",
 			},
 			{
-				accessorKey: "id",
 				header: "Actions",
 				cell: ({ row }) => {
 					return (
