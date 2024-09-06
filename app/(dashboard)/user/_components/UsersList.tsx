@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 import { useUsers } from "../../../../lib/hook/useUser";
-import Spinner from "../../../../lib/_components/Spinner";
 import Pagination from "../../_components/Pagination";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { usersData } from "../slice";
@@ -56,7 +55,7 @@ export default function UsersList({ page, size }: SearchParams) {
 			},
 			{
 				accessorKey: "email",
-				header: "Emal",
+				header: "Email",
 			},
 			{
 				accessorKey: "id",
@@ -96,8 +95,6 @@ export default function UsersList({ page, size }: SearchParams) {
 
 	const { users } = useAppSelector((state) => state.userReducer); //get redux store
 
-	if (isLoading) return <Spinner size="medium" />;
-
 	const handlePageChange = (newPage: number, newSize: number) => {
 		router.push(`?page=${newPage}&size=${newSize}`);
 	};
@@ -112,7 +109,7 @@ export default function UsersList({ page, size }: SearchParams) {
 					<CreateUserButton />
 				</div>
 			</div>
-			<DynamicTable data={users} columns={columns} />
+			<DynamicTable data={users} columns={columns} isLoading={isLoading} />
 
 			<Pagination page={page} size={size} onPageChange={handlePageChange} />
 		</>

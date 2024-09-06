@@ -1,7 +1,5 @@
 "use client";
 
-import Spinner from "../../../../../lib/_components/Spinner";
-
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -71,7 +69,6 @@ export default function ResourcesList({ page, size }: SearchParams) {
 		}
 	}, [resourceData]);
 
-	if (isLoading) return <Spinner size="medium" />;
 	if (error) {
 		return <div>Error fetching resources: {error.message}</div>;
 	}
@@ -82,7 +79,7 @@ export default function ResourcesList({ page, size }: SearchParams) {
 
 	return (
 		<div className="overflow-auto">
-			<DynamicTable data={resource} columns={columns} />
+			<DynamicTable data={resource} columns={columns} isLoading={isLoading} />
 			<Pagination page={page} size={size} onPageChange={handlePageChange} />
 		</div>
 	);
