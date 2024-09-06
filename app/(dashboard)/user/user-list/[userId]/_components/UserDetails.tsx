@@ -4,8 +4,8 @@ import { Mail } from "lucide-react";
 import Image from "next/image";
 import { useSingleUSer } from "../../../../../../lib/hook/useSingleUser";
 import Spinner from "@/lib/_components/Spinner";
-import EditUserBtn from "../../../_components/EditUserModal";
-import DeleteUserBtn from "../../../_components/DeleteUserConfirmation";
+import DeleteUserConfirmation from "../../../_components/DeleteUserConfirmation";
+import EditUserModal from "../../../_components/EditUserModal";
 
 type Props = {
 	userId: number;
@@ -42,8 +42,8 @@ export default function UserDetails({ userId }: Props) {
 				</div>
 			</div>
 			<div className="space-x-2 mr-10">
-				<EditUserBtn userId={userId} />
-				<DeleteUserBtn userId={userId} />
+				<EditUserModal userId={userId} />
+				<DeleteUserConfirmation userId={userId} />
 			</div>
 		</div>
 	);

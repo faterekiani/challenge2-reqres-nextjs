@@ -1,10 +1,10 @@
 "use client";
 
 import { Folder, User } from "lucide-react";
-import TotalStat from "./TotalStat";
-import { useUsers } from "../../../lib/hook/useUser";
 import { SearchParams } from "@/lib/types/types";
-import useGetAllResources from "../../../lib/hook/useGetAllResources";
+import { useUsers } from "@/lib/hook/useUser";
+import useGetAllResources from "@/lib/hook/useGetAllResources";
+import TotalStat from "./TotalStat";
 
 export default function TotalStats({ page, size }: SearchParams) {
 	const { userData, isLoading: isLoadingUser } = useUsers({

@@ -7,7 +7,7 @@ type Props = {
 	resourceId: number;
 };
 
-export default function ResourceDetailes({ resourceId }: Props) {
+export default function ResourceDetails({ resourceId }: Props) {
 	const { isLoading, singleResourceData } = useSingleResource(resourceId);
 
 	if (isLoading) return <Spinner size="medium" />;

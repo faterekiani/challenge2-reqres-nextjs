@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 import { useUsers } from "../../../../lib/hook/useUser";
-import Pagination from "../../_components/Pagination";
+import Pagination from "../../../../lib/_components/Pagination";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { usersData } from "../slice";
 import { SearchParams } from "@/lib/types/types";
@@ -15,7 +15,7 @@ import defaultImage from "../../../../public/default.jpg";
 
 import Link from "next/link";
 import { Eye } from "lucide-react";
-import { DynamicTable } from "../../_components/DynamicTable ";
+import { DynamicTable } from "../../../../lib/_components/DynamicTable ";
 import DeleteUserConfirmation from "./DeleteUserConfirmation";
 import CreateUserButton from "./CreateUserButton";
 import EditUserModal from "./EditUserModal";

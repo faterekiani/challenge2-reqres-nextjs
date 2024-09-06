@@ -1,4 +1,4 @@
-import UserDetails from "./_components/UserDetailes";
+import UserDetails from "./_components/UserDetails";
 
 type UserPageParams = {
 	userId: number;

@@ -1,4 +1,4 @@
-import ResourceDetailes from "./_component/ResourceDetailes";
+import ResourceDetailes from "./_component/ResourceDetails";
 
 type ResourcePageParams = {
 	resourceId: number;

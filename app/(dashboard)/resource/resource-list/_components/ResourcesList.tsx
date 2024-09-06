@@ -7,11 +7,11 @@ import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 
-import Pagination from "../../../_components/Pagination";
+import Pagination from "../../../../../lib/_components/Pagination";
 import { SearchParams } from "@/lib/types/types";
 import { useResource } from "@/lib/hook/useResource";
 import { Resource } from "../../_types/type";
-import { DynamicTable } from "@/app/(dashboard)/_components/DynamicTable ";
+import { DynamicTable } from "@/lib/_components/DynamicTable ";
 
 export default function ResourcesList({ page, size }: SearchParams) {
 	const [resource, setResource] = useState<Resource[]>([]);

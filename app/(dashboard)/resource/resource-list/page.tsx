@@ -5,7 +5,7 @@ export const metadata = {
 	title: "Resource list",
 };
 
-export default function ResoursesListPage({
+export default function ResourcesListPage({
 	searchParams,
 }: {
 	searchParams: SearchParams;
