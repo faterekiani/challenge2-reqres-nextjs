@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/_lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { updateUserApi } from "@/_lib/data-services";
-import { useSingleUSer } from "../../../../_lib/hook/useSingleUser";
+import { updateUserApi } from "@/lib/data-services";
+import { useSingleUSer } from "../../../../lib/hook/useSingleUser";
 import { editUser } from "../slice";
 
 import { useRouter } from "next/navigation";
-import apiRoutes from "@/_lib/constants";
-import { showToast } from "@/_lib/_components/Toast";
-import Button from "@/_lib/_components/Button";
+import apiRoutes from "@/lib/constants";
+import { showToast } from "@/lib/_components/Toast";
+import Button from "@/lib/_components/Button";
 
 type Props = {
 	userId: number;

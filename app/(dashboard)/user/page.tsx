@@ -1,4 +1,4 @@
-import { SearchParams } from "@/_lib/types/types";
+import { SearchParams } from "@/lib/types/types";
 import TotalStats from "../_components/TotalStats";
 
 export default function UsersPage({

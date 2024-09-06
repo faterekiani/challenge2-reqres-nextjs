@@ -1,4 +1,4 @@
-import { getAllResorcesApi } from "@/_lib/data-services";
+import { getAllResorcesApi } from "@/lib/data-services";
 import { useQuery } from "@tanstack/react-query";
 
 type Props = {

@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
-import { useUsers } from "../../../../_lib/hook/useUser";
-import Spinner from "../../../../_lib/_components/Spinner";
+import { useUsers } from "../../../../lib/hook/useUser";
+import Spinner from "../../../../lib/_components/Spinner";
 import Pagination from "../../_components/Pagination";
-import { useAppDispatch, useAppSelector } from "@/_lib/store/hooks";
-import { addData } from "../slice";
-import { SearchParams } from "@/_lib/types/types";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { usersData } from "../slice";
+import { SearchParams } from "@/lib/types/types";
 import { User } from "../_types/type";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
@@ -21,7 +21,7 @@ import DeleteUserConfirmation from "./DeleteUserConfirmation";
 import CreateUserButton from "./CreateUserButton";
 import EditUserModal from "./EditUserModal";
 
-export default function UserTable({ page, size }: SearchParams) {
+export default function UsersList({ page, size }: SearchParams) {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
 
@@ -32,8 +32,8 @@ export default function UserTable({ page, size }: SearchParams) {
 				header: "ID",
 			},
 			{
-				accessorKey: "id",
-				header: () => "Avatar",
+				accessorKey: "avatar",
+				header: "Avatar",
 				cell: ({ row }) => {
 					return (
 						<Image
@@ -90,7 +90,7 @@ export default function UserTable({ page, size }: SearchParams) {
 	// set all users in the redux store
 	useEffect(() => {
 		if (userData) {
-			dispatch(addData(userData?.data));
+			dispatch(usersData(userData?.data));
 		}
 	}, [userData, dispatch, isFetching, isLoading]);
 

@@ -5,12 +5,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { loginUserApi } from "@/_lib/data-services";
-import { showToast } from "@/_lib/_components/Toast";
-import { setCookie } from "@/_lib/auth/action";
-import apiRoutes from "@/_lib/constants";
-import Spinner from "@/_lib/_components/Spinner";
-import Button from "@/_lib/_components/Button";
+import { loginUserApi } from "@/lib/data-services";
+import { showToast } from "@/lib/_components/Toast";
+import { setCookie } from "@/lib/auth/action";
+import apiRoutes from "@/lib/constants";
+import Spinner from "@/lib/_components/Spinner";
+import Button from "@/lib/_components/Button";
 import Link from "next/link";
 
 import schema from "../_schema/authSchema";

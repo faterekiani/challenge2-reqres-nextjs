@@ -1,7 +1,7 @@
-import { SearchParams } from "@/_lib/types/types";
+import { SearchParams } from "@/lib/types/types";
 import { Suspense } from "react";
-import Spinner from "../../../../_lib/_components/Spinner";
-import ResourceTable from "./_components/ResourceTable";
+import Spinner from "../../../../lib/_components/Spinner";
+import ResourcesList from "./_components/ResourcesList";
 
 export const metadata = {
 	title: "Resource list",
@@ -21,7 +21,7 @@ export default function ResoursesListPage({
 				List of <span className="text-primary-950">resources</span>
 			</h1>
 			<Suspense fallback={<Spinner size="medium" />}>
-				<ResourceTable page={pageCount} size={pageSize} />
+				<ResourcesList page={pageCount} size={pageSize} />
 			</Suspense>
 		</>
 	);

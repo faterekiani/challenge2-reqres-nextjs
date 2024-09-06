@@ -1,8 +1,8 @@
 import "@/app/globals.css";
 
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Provider from "../_lib/provider";
-import ToastProvider from "../_lib/_components/Toast";
+import Provider from "../lib/provider";
+import ToastProvider from "../lib/_components/Toast";
 import StoreProvider from "./StoreProvider";
 
 // FONT

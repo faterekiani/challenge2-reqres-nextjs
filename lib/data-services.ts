@@ -1,4 +1,4 @@
-import apiRoutes, { baseUrl } from "@/_lib/constants";
+import apiRoutes, { baseUrl } from "@/lib/constants";
 
 import {
 	CreateNewUser,

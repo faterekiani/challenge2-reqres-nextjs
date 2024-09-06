@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import UserTable from "../_components/UserTable";
-import Spinner from "../../../../_lib/_components/Spinner";
-import { SearchParams } from "@/_lib/types/types";
+import UsersList from "../_components/UsersList";
+import Spinner from "../../../../lib/_components/Spinner";
+import { SearchParams } from "@/lib/types/types";
 
 // meatdata
 export const metadata = {
@@ -18,7 +18,7 @@ export default function UsersListPage({
 
 	return (
 		<Suspense fallback={<Spinner size="medium" />}>
-			<UserTable page={pageCount} size={pageSize} />
+			<UsersList page={pageCount} size={pageSize} />
 		</Suspense>
 	);
 }

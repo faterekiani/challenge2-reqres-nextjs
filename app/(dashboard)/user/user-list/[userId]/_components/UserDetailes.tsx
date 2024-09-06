@@ -2,8 +2,8 @@
 
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import { useSingleUSer } from "../../../../../../_lib/hook/useSingleUser";
-import Spinner from "@/_lib/_components/Spinner";
+import { useSingleUSer } from "../../../../../../lib/hook/useSingleUser";
+import Spinner from "@/lib/_components/Spinner";
 import EditUserBtn from "../../../_components/EditUserModal";
 import DeleteUserBtn from "../../../_components/DeleteUserConfirmation";
 

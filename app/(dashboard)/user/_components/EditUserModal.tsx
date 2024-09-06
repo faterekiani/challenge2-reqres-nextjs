@@ -4,28 +4,31 @@ import { useState } from "react";
 import { Pencil } from "lucide-react";
 
 import EditUserForm from "./EditUserForm";
-import Modal from "../../../../_lib/_components/Modal";
+import Modal from "../../../../lib/_components/Modal";
 
 type Props = {
 	userId: number;
 };
 
 export default function EditUserModal({ userId }: Props) {
-	const [showEditForm, setShowEditForm] = useState(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
 	return (
 		<>
 			<button
 				className="hover:text-indigo-700 transition-all"
-				onClick={() => setShowEditForm((show) => !show)}
+				onClick={() => setIsEditModalOpen((show) => !show)}
 			>
 				<Pencil size={15} />
 			</button>
-			{showEditForm && (
-				<Modal isOpen={showEditForm} onClose={() => setShowEditForm(false)}>
+			{isEditModalOpen && (
+				<Modal
+					isOpen={isEditModalOpen}
+					onClose={() => setIsEditModalOpen(false)}
+				>
 					<EditUserForm
 						userId={userId}
-						onClose={() => setShowEditForm(false)}
+						onClose={() => setIsEditModalOpen(false)}
 					/>
 				</Modal>
 			)}

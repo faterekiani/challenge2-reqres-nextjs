@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import apiRoutes from "./_lib/constants";
+import apiRoutes from "./lib/constants";
 
 export function middleware(req: NextRequest) {
 	const token = req.cookies.has("token");
