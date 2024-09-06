@@ -1,4 +1,4 @@
-import ResourceDetailes from "./_component/ResourceDetails";
+import ResourceDetails from "./_component/ResourceDetails";
 
 type ResourcePageParams = {
 	resourceId: number;
@@ -12,7 +12,7 @@ export async function generateMetadata({
 	return { title: `Resource ${params.resourceId}` };
 }
 
-export default function ResourceDetailesPage({
+export default function ResourceDetailsPage({
 	params,
 }: {
 	params: ResourcePageParams;
@@ -21,7 +21,7 @@ export default function ResourceDetailesPage({
 
 	return (
 		<div>
-			<ResourceDetailes resourceId={resourceId} />
+			<ResourceDetails resourceId={resourceId} />
 		</div>
 	);
 }

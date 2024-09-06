@@ -17,7 +17,10 @@ export default function EditUserModal({ userId }: Props) {
 		<>
 			<button
 				className="hover:text-indigo-700 transition-all"
-				onClick={() => setIsEditModalOpen((show) => !show)}
+				onClick={(event) => {
+					event.stopPropagation();
+					setIsEditModalOpen((show) => !show);
+				}}
 			>
 				<Pencil size={15} />
 			</button>

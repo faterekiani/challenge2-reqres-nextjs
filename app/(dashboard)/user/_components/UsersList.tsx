@@ -13,8 +13,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 import defaultImage from "../../../../public/default.jpg";
 
-import Link from "next/link";
-import { Eye } from "lucide-react";
 import { DynamicTable } from "../../../../lib/_components/DynamicTable ";
 import DeleteUserConfirmation from "./DeleteUserConfirmation";
 import CreateUserButton from "./CreateUserButton";
@@ -62,13 +60,6 @@ export default function UsersList({ page, size }: SearchParams) {
 				cell: ({ row }) => {
 					return (
 						<div className="flex items-center gap-x-2">
-							<Link href={`/user/user-list/${row.original.id}`}>
-								<Eye
-									size={15}
-									className="hover:text-secondary transition-colors"
-								/>
-							</Link>
-
 							<EditUserModal userId={row.original.id} />
 
 							<DeleteUserConfirmation userId={row.original.id} />
@@ -108,7 +99,12 @@ export default function UsersList({ page, size }: SearchParams) {
 					<CreateUserButton />
 				</div>
 			</div>
-			<DynamicTable data={users} columns={columns} isLoading={isLoading} />
+			<DynamicTable
+				data={users}
+				columns={columns}
+				isLoading={isLoading}
+				onClick={(row) => router.push(`/user/user-list/${row.original.id}`)}
+			/>
 
 			<Pagination page={page} size={size} onPageChange={handlePageChange} />
 		</>

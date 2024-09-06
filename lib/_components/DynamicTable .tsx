@@ -3,6 +3,7 @@ import {
 	getCoreRowModel,
 	flexRender,
 	ColumnDef,
+	CoreRow,
 } from "@tanstack/react-table";
 import Spinner from "@/lib/_components/Spinner";
 
@@ -10,12 +11,14 @@ type DynamicTableProps<T extends object> = {
 	data: T[];
 	columns: ColumnDef<T>[];
 	isLoading: boolean;
+	onClick?: (row: CoreRow<T>) => void;
 };
 
 export const DynamicTable = <T extends object>({
 	data,
 	columns,
 	isLoading,
+	onClick,
 }: DynamicTableProps<T>) => {
 	const table = useReactTable({
 		data,
@@ -27,12 +30,12 @@ export const DynamicTable = <T extends object>({
 		<table className=" bg-white rounded-md overflow-hidden my-4 w-full shadow-sm">
 			<thead className="bg-primary-950 text-white">
 				{table.getHeaderGroups().map((headerGroup) => (
-					<tr
-						key={headerGroup.id}
-						className="grid grid-cols-[1fr,2fr,2fr,2fr,3fr,2fr] py-4"
-					>
+					<tr key={headerGroup.id}>
 						{headerGroup.headers.map((header) => (
-							<th key={header.id} className="text-sm tracking-wide capitalize ">
+							<th
+								key={header.id}
+								className="text-sm tracking-wide capitalize px-4 py-4"
+							>
 								{header.isPlaceholder
 									? null
 									: flexRender(
@@ -55,14 +58,19 @@ export const DynamicTable = <T extends object>({
 					table.getRowModel().rows.map((row) => (
 						<tr
 							key={row.id}
-							className="grid grid-cols-[1fr,2fr,2fr,2fr,3fr,2fr] hover:bg-primary-200 py-2"
+							className={`hover:bg-primary-200 py-2 ${!!onClick ? "cursor-pointer" : "cursor-default"} `}
+							onClick={() => {
+								if (onClick) onClick(row);
+							}}
 						>
 							{row.getVisibleCells().map((cell) => (
 								<td
 									key={cell.id}
-									className="text-sm text-gray-500 whitespace-nowrap flex justify-center items-center"
+									className="text-sm text-gray-500 whitespace-nowrap p-4 border-b"
 								>
-									{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									<div className="flex justify-center items-center">
+										{flexRender(cell.column.columnDef.cell, cell.getContext())}
+									</div>
 								</td>
 							))}
 						</tr>

@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: UserPageParams }) {
 	return { title: `User ${params.userId}` };
 }
 
-export default function UserDetailesPage({
+export default function UserDetailsPage({
 	params,
 }: {
 	params: UserPageParams;

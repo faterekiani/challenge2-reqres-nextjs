@@ -49,7 +49,10 @@ export default function DeleteUserConfirmation({ userId }: Props) {
 		<>
 			<button
 				className="hover:text-red-600 transition-all"
-				onClick={() => setIsDeleteModalOpen(true)}
+				onClick={(event) => {
+					event.stopPropagation();
+					setIsDeleteModalOpen((show) => !show);
+				}}
 			>
 				<Trash2 size={15} />
 			</button>

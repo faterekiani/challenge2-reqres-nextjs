@@ -2,10 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Eye } from "lucide-react";
 
 import Pagination from "../../../../../lib/_components/Pagination";
 import { SearchParams } from "@/lib/types/types";
@@ -39,21 +37,6 @@ export default function ResourcesList({ page, size }: SearchParams) {
 				accessorKey: "pantone_value",
 				header: "Pantone_value",
 			},
-			{
-				header: "Actions",
-				cell: ({ row }) => {
-					return (
-						<div className="flex items-center gap-x-2">
-							<Link href={`/resource/resource-list/${row.original.id}`}>
-								<Eye
-									size={15}
-									className="hover:text-secondary transition-colors"
-								/>
-							</Link>
-						</div>
-					);
-				},
-			},
 		],
 		[],
 	);
@@ -79,7 +62,14 @@ export default function ResourcesList({ page, size }: SearchParams) {
 
 	return (
 		<div className="overflow-auto">
-			<DynamicTable data={resource} columns={columns} isLoading={isLoading} />
+			<DynamicTable
+				data={resource}
+				columns={columns}
+				isLoading={isLoading}
+				onClick={(row) =>
+					router.push(`/resource/resource-list/${row.original.id}`)
+				}
+			/>
 			<Pagination page={page} size={size} onPageChange={handlePageChange} />
 		</div>
 	);
