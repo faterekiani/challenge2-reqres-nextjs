@@ -92,7 +92,7 @@ export default function UsersList({ page, size }: SearchParams) {
 	return (
 		<>
 			<div className="flex items-center justify-between">
-				<h1 className="text-secondary text-2xl font-black tracking-tight uppercase">
+				<h1 className="text-secondary text-2xl font-bold tracking-tight uppercase">
 					List Of <span className="text-primary-950">users</span>
 				</h1>
 				<div className="flex justify-end pb-2">

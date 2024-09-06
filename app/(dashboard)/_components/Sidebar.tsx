@@ -38,7 +38,7 @@ export default function Sidebar() {
 			<div className="flex flex-col w-full">
 				<Link
 					href="/user"
-					className="text-2xl text-primary font-black text-primary-950 text-center border-b-[1px] border-primary-950 pb-4"
+					className="text-2xl text-primary font-bold text-primary-950 text-center border-b-[1px] border-primary-950 pb-4"
 				>
 					reqRes
 				</Link>

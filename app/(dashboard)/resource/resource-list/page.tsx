@@ -14,7 +14,7 @@ export default function ResourcesListPage({
 	const pageSize = searchParams?.size || 6;
 	return (
 		<>
-			<h1 className="text-secondary text-2xl font-black tracking-tight uppercase pb-2">
+			<h1 className="text-secondary text-2xl font-bold tracking-tight uppercase pb-2">
 				List of <span className="text-primary-950">resources</span>
 			</h1>
 			<ResourcesList page={pageCount} size={pageSize} />
