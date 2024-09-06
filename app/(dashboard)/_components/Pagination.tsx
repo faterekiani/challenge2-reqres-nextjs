@@ -35,7 +35,7 @@ function Pagination({ page, size, onPageChange }: PaginationProps) {
 	};
 
 	return (
-		<div className="flex items-center justify-between py-4 mx-auto">
+		<div className="flex items-center justify-between py-4">
 			<div className="flex items-center gap-x-2 text-sm">
 				<label htmlFor="sizeSelect" className="text-gray-500">
 					Items per page:

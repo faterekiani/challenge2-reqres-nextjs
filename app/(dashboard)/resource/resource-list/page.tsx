@@ -16,13 +16,13 @@ export default function ResoursesListPage({
 	const pageSize = searchParams?.size || 6;
 	console.log(searchParams?.page);
 	return (
-		<div className="mx-auto">
+		<>
 			<h1 className="text-secondary text-2xl font-black tracking-tight uppercase pb-2">
 				List of <span className="text-primary-950">resources</span>
 			</h1>
 			<Suspense fallback={<Spinner size="medium" />}>
 				<ResourceTable page={pageCount} size={pageSize} />
 			</Suspense>
-		</div>
+		</>
 	);
 }

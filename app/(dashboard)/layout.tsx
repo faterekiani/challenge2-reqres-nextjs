@@ -20,7 +20,7 @@ export default function DashboardLayout({
 			<Sidebar />
 			<div className="flex flex-col w-full h-full ml-64 overflow-auto">
 				<Header />
-				<div className="mx-40 my-10">{children}</div>
+				<div className="mx-36 my-10">{children}</div>
 			</div>
 		</div>
 	);

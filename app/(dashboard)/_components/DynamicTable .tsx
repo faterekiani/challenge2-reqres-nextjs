@@ -23,7 +23,7 @@ export const DynamicTable = <T extends object>({
 	});
 
 	return (
-		<table className=" bg-white rounded-md overflow-hidden my-3 w-full">
+		<table className=" bg-white rounded-md overflow-hidden my-4 w-full">
 			<thead className="bg-primary-950 text-white">
 				{table.getHeaderGroups().map((headerGroup) => (
 					<tr
