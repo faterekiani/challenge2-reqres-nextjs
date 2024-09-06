@@ -11,7 +11,7 @@ export default function useGetAllResources(
 		error,
 	} = useQuery({
 		queryKey: ["resource", pageNumber, pageSize],
-		queryFn: () => getAllResorcesApi(pageNumber, pageSize),
+		queryFn: () => getAllResorcesApi({ pageNumber, pageSize }),
 	});
 
 	return { resourceData, isLoading, error };

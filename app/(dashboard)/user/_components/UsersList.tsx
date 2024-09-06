@@ -80,7 +80,7 @@ export default function UsersList({ page, size }: SearchParams) {
 		[],
 	);
 
-	const { isLoading, userData, isFetching } = useUsers({
+	const { isLoading, userData } = useUsers({
 		pageNumber: page,
 		pageSize: size,
 	});
@@ -90,7 +90,7 @@ export default function UsersList({ page, size }: SearchParams) {
 		if (userData) {
 			dispatch(usersData(userData?.data));
 		}
-	}, [userData, dispatch, isFetching, isLoading]);
+	}, [userData, dispatch]);
 
 	const { users } = useAppSelector((state) => state.userReducer); //get redux store
 

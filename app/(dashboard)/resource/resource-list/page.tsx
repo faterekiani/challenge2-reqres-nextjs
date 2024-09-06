@@ -12,7 +12,6 @@ export default function ResoursesListPage({
 }) {
 	const pageCount = searchParams?.page || 1;
 	const pageSize = searchParams?.size || 6;
-	console.log(searchParams?.page);
 	return (
 		<>
 			<h1 className="text-secondary text-2xl font-black tracking-tight uppercase pb-2">

@@ -31,7 +31,7 @@ const userSlice = createSlice({
 		},
 
 		createNewUser: (state, action: PayloadAction<NewUser>) => {
-			state.users.push(action.payload);
+			state.users.unshift(action.payload);
 		},
 
 		editUser: (state, action: PayloadAction<UpdateUserPayload>) => {

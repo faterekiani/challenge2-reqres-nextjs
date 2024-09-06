@@ -11,7 +11,6 @@ import { createNewUser } from "../slice";
 // import Spinner from "@/app/components/Spinner";
 import Button from "@/lib/_components/Button";
 import { User } from "../_types/type";
-import { z } from "zod";
 
 type Props = {
 	onClose: () => void;
