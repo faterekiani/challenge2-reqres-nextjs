@@ -3,13 +3,9 @@ import {
 	useReactTable,
 	getCoreRowModel,
 	flexRender,
+	ColumnDef,
 } from "@tanstack/react-table";
-
-type ColumnDef<T> = {
-	accessorKey: keyof T | string;
-	header: string;
-	cell?: (info: any) => JSX.Element;
-};
+import Link from "next/link";
 
 type DynamicTableProps<T extends object> = {
 	data: T[];
@@ -54,7 +50,6 @@ export const DynamicTable = <T extends object>({
 
 				<tbody>
 					{table.getRowModel().rows.map((row) => (
-						// <Link href="/" key={row.id}>
 						<tr
 							key={row.id}
 							className="grid grid-cols-[1fr,2fr,2fr,2fr,3fr,2fr] hover:bg-primary-200 py-2"
@@ -68,7 +63,6 @@ export const DynamicTable = <T extends object>({
 								</td>
 							))}
 						</tr>
-						// </Link>
 					))}
 				</tbody>
 			</table>

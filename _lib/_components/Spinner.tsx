@@ -4,7 +4,7 @@ type Props = {
 	size: "small" | "medium";
 };
 
-const Loader = ({ size }: Props) => {
+const Spinner = ({ size }: Props) => {
 	const style =
 		size === "small"
 			? "text-white w-[20px]"
@@ -12,4 +12,4 @@ const Loader = ({ size }: Props) => {
 	return <LoaderCircle size={size} className={`animate-spin ${style}`} />;
 };
 
-export default Loader;
+export default Spinner;

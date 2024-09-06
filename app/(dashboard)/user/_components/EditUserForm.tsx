@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/_lib/store/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { showToast } from "@/app/components/Toast";
 
 import { updateUserApi } from "@/_lib/data-services";
 import { useSingleUSer } from "../../../../_lib/hook/useSingleUser";
 import { editUser } from "../slice";
 
 import { useRouter } from "next/navigation";
-import Button from "@/app/components/Button";
 import apiRoutes from "@/_lib/constants";
+import { showToast } from "@/_lib/_components/Toast";
+import Button from "@/_lib/_components/Button";
 
 type Props = {
 	userId: number;
@@ -17,10 +17,10 @@ type Props = {
 };
 
 export default function EditUserForm({ userId, onClose }: Props) {
-	const [editUserName, setEditUserName] = useState("");
-	const [editUserJob] = useState("");
-	const [lastName, setLastName] = useState("");
+	const [newName, setNewName] = useState("");
+	const [newLastName, setNewLastName] = useState("");
 	const [newEmail, setNewEmail] = useState("");
+	const [editUserJob] = useState("");
 
 	const queryClient = useQueryClient();
 	const dispatch = useAppDispatch();
@@ -34,8 +34,8 @@ export default function EditUserForm({ userId, onClose }: Props) {
 		mutationFn: updateUserApi,
 		onSuccess: () => {
 			const updateUser = {
-				first_name: editUserName,
-				last_name: lastName,
+				first_name: newName,
+				last_name: newLastName,
 				email: newEmail,
 			};
 
@@ -53,8 +53,8 @@ export default function EditUserForm({ userId, onClose }: Props) {
 
 	useEffect(() => {
 		if (singleUserData) {
-			setEditUserName(singleUserData.data.first_name);
-			setLastName(singleUserData.data.last_name);
+			setNewName(singleUserData.data.first_name);
+			setNewLastName(singleUserData.data.last_name);
 			setNewEmail(singleUserData.data.email);
 		}
 	}, [singleUserData]);
@@ -62,7 +62,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
 	function handleSubmitEditUserForm(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
 
-		EditUserMutate({ userId, name: editUserName, job: editUserJob });
+		EditUserMutate({ userId, name: newName, job: editUserJob });
 	}
 
 	return (
@@ -78,8 +78,8 @@ export default function EditUserForm({ userId, onClose }: Props) {
 						Name
 					</label>
 					<input
-						value={editUserName}
-						onChange={(e) => setEditUserName(e.target.value)}
+						value={newName}
+						onChange={(e) => setNewName(e.target.value)}
 						name="name"
 						className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
 					/>
@@ -87,15 +87,15 @@ export default function EditUserForm({ userId, onClose }: Props) {
 
 				<div className="mb-4">
 					<label
-						htmlFor="lastName"
+						htmlFor="newLastName"
 						className="block text-gray-700 text-sm font-bold mb-2"
 					>
 						Last name
 					</label>
 					<input
-						value={lastName}
-						onChange={(e) => setLastName(e.target.value)}
-						name="lastName"
+						value={newLastName}
+						onChange={(e) => setNewLastName(e.target.value)}
+						name="newLastName"
 						className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
 					/>
 				</div>
@@ -110,7 +110,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
 					<input
 						value={newEmail}
 						onChange={(e) => setNewEmail(e.target.value)}
-						name="job"
+						name="email"
 						className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-primary-950"
 					/>
 				</div>
@@ -119,7 +119,7 @@ export default function EditUserForm({ userId, onClose }: Props) {
 					type="submit"
 					variant="primary"
 					isLoading={isPending}
-					disabled={!editUserName || !lastName || !newEmail}
+					disabled={!newName || !newLastName || !newEmail}
 				>
 					Edit User
 				</Button>

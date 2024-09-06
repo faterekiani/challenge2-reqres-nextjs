@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import UserTable from "../_components/UserTable";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../../_lib/_components/Spinner";
 import { SearchParams } from "@/_lib/types/types";
 
 // meatdata

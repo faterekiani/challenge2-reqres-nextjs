@@ -1,14 +1,14 @@
 import { Trash2 } from "lucide-react";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteUserApi, getAllUsersInfoApi } from "@/_lib/data-services";
-import { showToast } from "../../../components/Toast";
+import { deleteUserApi } from "@/_lib/data-services";
+import { showToast } from "../../../../_lib/_components/Toast";
 import { deleteUser } from "../slice";
 import { useAppDispatch } from "@/_lib/store/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Modal from "@/app/components/Modal";
-import Button from "@/app/components/Button";
+import Modal from "@/_lib/_components/Modal";
+import Button from "@/_lib/_components/Button";
 import apiRoutes from "@/_lib/constants";
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
 	// page: number;
 	// size: number;
 };
-export default function DeleteUserBtn({ userId }: Props) {
+export default function DeleteUserConfirmation({ userId }: Props) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const queryClient = useQueryClient();
@@ -27,18 +27,9 @@ export default function DeleteUserBtn({ userId }: Props) {
 
 	const { mutate: deleteUserMutate } = useMutation({
 		mutationFn: deleteUserApi,
-		onSuccess: async () => {
+		onSuccess: () => {
 			setIsModalOpen(false);
 			dispatch(deleteUser(userId)); // update the state
-
-			// const nextPage = await queryClient.fetchQuery({
-			// 	queryKey: ["users", { page: page + 1 }],
-			// 	queryFn: () =>
-			// 		getAllUsersInfoApi({ pageNumber: page + 1, pageSize: size }),
-			// 	// staleTime: Infinity,
-			// });
-
-			// console.log("next", nextPage);
 
 			showToast("success", "user successfully deleted");
 			queryClient.invalidateQueries({
@@ -80,18 +71,3 @@ export default function DeleteUserBtn({ userId }: Props) {
 		</>
 	);
 }
-
-//  const nextPage = await queryClient.fetchQuery({
-//   queryKey: ["users", { page: page + 1 }],
-//   queryFn: () => getAllUsersInfoApi(page + 1, size),
-//   staleTime: Infinity, // Keep the data fresh
-// });
-// console.log("nextPage", nextPage);
-
-// const updatedUsers = userData?.data?.filter((user) => user.id !== userId);
-// if (updatedUsers && nextPage) {
-//   updatedUsers.push(nextPage[0]);
-//   queryClient.setQueryData(["users"], updatedUsers);
-// }
-
-// console.log("updatedUsers", updatedUsers);

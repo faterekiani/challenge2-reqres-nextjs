@@ -3,14 +3,15 @@
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAppDispatch } from "@/_lib/store/hooks";
-import { showToast } from "@/app/components/Toast";
+import { showToast } from "@/_lib/_components/Toast";
 
 import { createNewUserApi } from "@/_lib/data-services";
 import { createNewUser } from "../slice";
 
 // import Spinner from "@/app/components/Spinner";
-import Button from "@/app/components/Button";
+import Button from "@/_lib/_components/Button";
 import { User } from "../_types/type";
+import { z } from "zod";
 
 type Props = {
 	onClose: () => void;

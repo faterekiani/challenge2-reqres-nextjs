@@ -1,78 +1,86 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useUsers } from "../../../../_lib/hook/useUser";
-import Spinner from "../../../components/Spinner";
+import Spinner from "../../../../_lib/_components/Spinner";
 import Pagination from "../../_components/Pagination";
-import CreateUserBtn from "./CreateUserBtn";
 import { useAppDispatch, useAppSelector } from "@/_lib/store/hooks";
 import { addData } from "../slice";
 import { SearchParams } from "@/_lib/types/types";
 import { User } from "../_types/type";
-import { createColumnHelper } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-import EditUserBtn from "./EditUserBtn";
-import DeleteUserBtn from "./DeleteUserBtn";
 import defaultImage from "../../../../public/default.jpg";
 
 import Link from "next/link";
 import { Eye } from "lucide-react";
 import { DynamicTable } from "../../_components/DynamicTable ";
-
-// tanstack table
-const columnHelper = createColumnHelper<User>();
-
-const columns = [
-	columnHelper.accessor("id", {
-		header: () => "ID",
-	}),
-
-	columnHelper.accessor("avatar", {
-		header: () => "Avatar",
-		cell: ({ row }) => {
-			return (
-				<Image
-					src={row.original.avatar ? row.original.avatar : defaultImage}
-					alt="Avatar"
-					width={40}
-					height={40}
-					className="rounded-full"
-				/>
-			);
-		},
-	}),
-	columnHelper.accessor("first_name", {
-		header: () => "Name",
-	}),
-	columnHelper.accessor("last_name", {
-		header: () => "Last name",
-	}),
-	columnHelper.accessor("email", {
-		header: () => "Email",
-	}),
-	columnHelper.accessor("id", {
-		header: () => "Actions",
-		cell: ({ row }) => {
-			return (
-				<div className="flex items-center gap-x-2">
-					<Link href={`/user/user-list/${row.original.id}`}>
-						<Eye size={15} className="hover:text-secondary transition-colors" />
-					</Link>
-
-					<EditUserBtn userId={row.original.id} />
-
-					<DeleteUserBtn userId={row.original.id} />
-				</div>
-			);
-		},
-	}),
-];
+import DeleteUserConfirmation from "./DeleteUserConfirmation";
+import CreateUserButton from "./CreateUserButton";
+import EditUserModal from "./EditUserModal";
 
 export default function UserTable({ page, size }: SearchParams) {
 	const router = useRouter();
 	const dispatch = useAppDispatch();
+
+	const columns = useMemo<ColumnDef<User>[]>(
+		() => [
+			{
+				accessorKey: "id",
+				header: "ID",
+			},
+			{
+				accessorKey: "id",
+				header: () => "Avatar",
+				cell: ({ row }) => {
+					return (
+						<Image
+							src={row.original.avatar ? row.original.avatar : defaultImage}
+							alt="Avatar"
+							width={40}
+							height={40}
+							className="rounded-full"
+						/>
+					);
+				},
+			},
+			{
+				accessorKey: "first_name",
+				header: "Name",
+			},
+			{
+				accessorKey: "last_name",
+				header: "Last name",
+			},
+			{
+				accessorKey: "email",
+				header: "Emal",
+			},
+			{
+				accessorKey: "id",
+				header: () => "Actions",
+				cell: ({ row }) => {
+					return (
+						<div className="flex items-center gap-x-2">
+							<Link href={`/user/user-list/${row.original.id}`}>
+								<Eye
+									size={15}
+									className="hover:text-secondary transition-colors"
+								/>
+							</Link>
+
+							<EditUserModal userId={row.original.id} />
+
+							<DeleteUserConfirmation userId={row.original.id} />
+						</div>
+					);
+				},
+			},
+		],
+		[],
+	);
 
 	const { isLoading, userData } = useUsers({
 		pageNumber: page,
@@ -88,12 +96,7 @@ export default function UserTable({ page, size }: SearchParams) {
 
 	const { users } = useAppSelector((state) => state.userReducer); //get redux store
 
-	if (isLoading)
-		return (
-			<div>
-				<Spinner size="medium" />
-			</div>
-		);
+	if (isLoading) return <Spinner size="medium" />;
 
 	const handlePageChange = (newPage: number, newSize: number) => {
 		router.push(`?page=${newPage}&size=${newSize}`);
@@ -106,7 +109,7 @@ export default function UserTable({ page, size }: SearchParams) {
 					List Of <span className="text-primary-950">users</span>
 				</h1>
 				<div className="flex justify-end pb-2">
-					<CreateUserBtn />
+					<CreateUserButton />
 				</div>
 			</div>
 			<DynamicTable data={users} columns={columns} />

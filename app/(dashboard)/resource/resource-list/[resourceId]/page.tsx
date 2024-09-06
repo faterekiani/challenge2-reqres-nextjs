@@ -1,23 +1,23 @@
-import SingleResourceDetailes from "./_component/SIngleResourceDetailes";
+import ResourceDetailes from "./_component/ResourceDetailes";
 
 type ResourcePageParams = {
-  resourceId: number;
+	resourceId: number;
 };
 
 export async function generateMetadata({
-  params,
+	params,
 }: {
-  params: ResourcePageParams;
+	params: ResourcePageParams;
 }) {
-  return { title: `Resource ${params.resourceId}` };
+	return { title: `Resource ${params.resourceId}` };
 }
 
 export default function Page({ params }: { params: ResourcePageParams }) {
-  const { resourceId } = params;
+	const { resourceId } = params;
 
-  return (
-    <div>
-      <SingleResourceDetailes resourceId={resourceId} />
-    </div>
-  );
+	return (
+		<div>
+			<ResourceDetailes resourceId={resourceId} />
+		</div>
+	);
 }

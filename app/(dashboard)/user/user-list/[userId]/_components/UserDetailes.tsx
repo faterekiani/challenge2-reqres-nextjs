@@ -3,17 +3,15 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import { useSingleUSer } from "../../../../../../_lib/hook/useSingleUser";
-import Spinner from "@/app/components/Spinner";
-import EditUserBtn from "../../../_components/EditUserBtn";
-import DeleteUserBtn from "../../../_components/DeleteUserBtn";
+import Spinner from "@/_lib/_components/Spinner";
+import EditUserBtn from "../../../_components/EditUserModal";
+import DeleteUserBtn from "../../../_components/DeleteUserConfirmation";
 
 type Props = {
 	userId: number;
-	page: number;
-	size: number;
 };
 
-export default function SingleUserDetails({ userId, page, size }: Props) {
+export default function UserDetails({ userId }: Props) {
 	const { singleUserData, isLoading } = useSingleUSer(userId);
 
 	if (isLoading) return <Spinner size="medium" />;
@@ -45,7 +43,7 @@ export default function SingleUserDetails({ userId, page, size }: Props) {
 			</div>
 			<div className="space-x-2 mr-10">
 				<EditUserBtn userId={userId} />
-				<DeleteUserBtn userId={userId} page={page} size={size} />
+				<DeleteUserBtn userId={userId} />
 			</div>
 		</div>
 	);

@@ -1,13 +1,13 @@
 "use client";
 
 import useSingleResource from "@/_lib/hook/useSingleResource";
-import Spinner from "@/app/components/Spinner";
+import Spinner from "@/_lib/_components/Spinner";
 
 type Props = {
 	resourceId: number;
 };
 
-export default function SingleResourceDetailes({ resourceId }: Props) {
+export default function ResourceDetailes({ resourceId }: Props) {
 	const { isLoading, singleResourceData } = useSingleResource(resourceId);
 
 	if (isLoading) return <Spinner size="medium" />;
