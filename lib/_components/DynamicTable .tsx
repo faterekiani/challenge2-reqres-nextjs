@@ -50,7 +50,7 @@ export const DynamicTable = <T extends object>({
 			<tbody>
 				{isLoading ? (
 					<tr>
-						<td>
+						<td colSpan={columns.length}>
 							<Spinner size="medium" />
 						</td>
 					</tr>
