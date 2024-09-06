@@ -2,9 +2,9 @@ export const metadata = {
 	title: "Resource",
 };
 
-export default function page() {
+export default function ResoursesPage() {
 	return (
-		<h1 className="text-secondary text-2xl font-black tracking-tight uppercase w-[900px] mx-auto">
+		<h1 className="text-secondary text-2xl font-black tracking-tight uppercase mx-auto">
 			<span className="text-primary-950">Resources</span>
 		</h1>
 	);

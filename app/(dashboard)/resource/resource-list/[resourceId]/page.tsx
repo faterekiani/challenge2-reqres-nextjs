@@ -12,7 +12,11 @@ export async function generateMetadata({
 	return { title: `Resource ${params.resourceId}` };
 }
 
-export default function Page({ params }: { params: ResourcePageParams }) {
+export default function ResourceDetailesPage({
+	params,
+}: {
+	params: ResourcePageParams;
+}) {
 	const { resourceId } = params;
 
 	return (

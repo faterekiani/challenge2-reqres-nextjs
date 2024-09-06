@@ -8,7 +8,11 @@ export const metadata = {
 	title: "User list",
 };
 
-export default function Page({ searchParams }: { searchParams: SearchParams }) {
+export default function UsersListPage({
+	searchParams,
+}: {
+	searchParams: SearchParams;
+}) {
 	const pageCount = searchParams?.page || 1;
 	const pageSize = searchParams?.size || 6;
 

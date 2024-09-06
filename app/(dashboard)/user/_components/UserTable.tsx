@@ -103,8 +103,8 @@ export default function UserTable({ page, size }: SearchParams) {
 	};
 
 	return (
-		<div className="overflow-auto">
-			<div className="flex items-center justify-between w-[900px] mx-auto">
+		<>
+			<div className="flex items-center justify-between">
 				<h1 className="text-secondary text-2xl font-black tracking-tight uppercase">
 					List Of <span className="text-primary-950">users</span>
 				</h1>
@@ -115,6 +115,6 @@ export default function UserTable({ page, size }: SearchParams) {
 			<DynamicTable data={users} columns={columns} />
 
 			<Pagination page={page} size={size} onPageChange={handlePageChange} />
-		</div>
+		</>
 	);
 }

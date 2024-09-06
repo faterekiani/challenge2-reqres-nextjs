@@ -1,4 +1,4 @@
-import SingleUserDetailes from "./_components/UserDetailes";
+import UserDetails from "./_components/UserDetailes";
 
 type UserPageParams = {
 	userId: number;
@@ -9,8 +9,12 @@ export async function generateMetadata({ params }: { params: UserPageParams }) {
 	return { title: `User ${params.userId}` };
 }
 
-export default function Page({ params }: { params: UserPageParams }) {
+export default function UserDetailesPage({
+	params,
+}: {
+	params: UserPageParams;
+}) {
 	const { userId } = params;
 
-	return <SingleUserDetailes userId={userId} />;
+	return <UserDetails userId={userId} />;
 }
