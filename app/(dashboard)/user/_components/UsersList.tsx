@@ -60,7 +60,7 @@ export default function UsersList({ page, size }: SearchParams) {
 			},
 			{
 				accessorKey: "id",
-				header: () => "Actions",
+				header: "Actions",
 				cell: ({ row }) => {
 					return (
 						<div className="flex items-center gap-x-2">

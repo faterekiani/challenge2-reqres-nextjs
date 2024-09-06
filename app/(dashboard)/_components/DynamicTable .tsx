@@ -5,7 +5,6 @@ import {
 	flexRender,
 	ColumnDef,
 } from "@tanstack/react-table";
-import Link from "next/link";
 
 type DynamicTableProps<T extends object> = {
 	data: T[];
