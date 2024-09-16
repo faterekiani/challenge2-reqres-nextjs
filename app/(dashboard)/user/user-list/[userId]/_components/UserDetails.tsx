@@ -3,7 +3,7 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import { useSingleUSer } from "../../../../../../lib/hook/useSingleUser";
-import Spinner from "@/lib/_components/Spinner";
+import Spinner from "@/lib/components/Spinner";
 import DeleteUserConfirmation from "../../../_components/DeleteUserConfirmation";
 import EditUserModal from "../../../_components/EditUserModal";
 

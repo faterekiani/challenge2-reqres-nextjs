@@ -6,11 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { registerUserApi } from "@/lib/data-services";
-import { showToast } from "@/lib/_components/Toast";
+import { showToast } from "@/lib/components/Toast";
 import { setCookie } from "@/lib/auth/action";
 import apiRoutes from "@/lib/constants";
-import Spinner from "@/lib/_components/Spinner";
-import Button from "@/lib/_components/Button";
+import Spinner from "@/lib/components/Spinner";
+import Button from "@/lib/components/Button";
 import Link from "next/link";
 
 import schema from "../_schema/authSchema";

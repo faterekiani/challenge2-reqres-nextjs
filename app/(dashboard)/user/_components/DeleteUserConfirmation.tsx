@@ -2,13 +2,13 @@ import { Trash2 } from "lucide-react";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUserApi } from "@/lib/data-services";
-import { showToast } from "../../../../lib/_components/Toast";
+import { showToast } from "../../../../lib/components/Toast";
 import { deleteUser } from "../slice";
 import { useAppDispatch } from "@/lib/store/hooks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Modal from "@/lib/_components/Modal";
-import Button from "@/lib/_components/Button";
+import Modal from "@/lib/components/Modal";
+import Button from "@/lib/components/Button";
 import apiRoutes from "@/lib/constants";
 
 type Props = {

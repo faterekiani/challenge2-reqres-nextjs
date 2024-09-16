@@ -3,10 +3,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ReactNode, useState } from "react";
-import ToastProvider from "../_components/Toast";
+import ToastProvider from "../components/Toast";
 import StoreProvider from "./StoreProvider";
 
-export default function Provider({ children }: { children: ReactNode }) {
+type Props = {
+	children: ReactNode;
+};
+
+export default function Provider({ children }: Props) {
 	const [queryCLient] = useState(() => new QueryClient());
 
 	return (

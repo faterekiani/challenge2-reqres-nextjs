@@ -3,13 +3,13 @@
 import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAppDispatch } from "@/lib/store/hooks";
-import { showToast } from "@/lib/_components/Toast";
+import { showToast } from "@/lib/components/Toast";
 
 import { createNewUserApi } from "@/lib/data-services";
 import { createNewUser } from "../slice";
 
 // import Spinner from "@/app/components/Spinner";
-import Button from "@/lib/_components/Button";
+import Button from "@/lib/components/Button";
 import { User } from "../_types/type";
 
 type Props = {

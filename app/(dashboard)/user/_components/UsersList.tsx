@@ -4,16 +4,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
 import { useUsers } from "../../../../lib/hook/useUser";
-import Pagination from "../../../../lib/_components/Pagination";
+import Pagination from "../../../../lib/components/Pagination";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { usersData } from "../slice";
 import { SearchParams } from "@/lib/types/types";
 import { User } from "../_types/type";
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
-import defaultImage from "../../../../public/default.jpg";
 
-import { DynamicTable } from "../../../../lib/_components/DynamicTable ";
+import { DynamicTable } from "../../../../lib/components/DynamicTable ";
 import DeleteUserConfirmation from "./DeleteUserConfirmation";
 import CreateUserButton from "./CreateUserButton";
 import EditUserModal from "./EditUserModal";
@@ -34,7 +33,7 @@ export default function UsersList({ page, size }: SearchParams) {
 				cell: ({ row }) => {
 					return (
 						<Image
-							src={row.original.avatar ? row.original.avatar : defaultImage}
+							src={row.original.avatar ? row.original.avatar : "/default.jpg"}
 							alt="Avatar"
 							width={40}
 							height={40}

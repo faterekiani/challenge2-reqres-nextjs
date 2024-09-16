@@ -2,9 +2,9 @@
 
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import Modal from "../../../../lib/_components/Modal";
+import Modal from "../../../../lib/components/Modal";
 import CreateUserForm from "./CreateUserForm";
-import Button from "@/lib/_components/Button";
+import Button from "@/lib/components/Button";
 
 export default function CreateUserButton() {
 	const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);

@@ -8,8 +8,8 @@ import { editUser } from "../slice";
 
 import { useRouter } from "next/navigation";
 import apiRoutes from "@/lib/constants";
-import { showToast } from "@/lib/_components/Toast";
-import Button from "@/lib/_components/Button";
+import { showToast } from "@/lib/components/Toast";
+import Button from "@/lib/components/Button";
 
 type Props = {
 	userId: number;

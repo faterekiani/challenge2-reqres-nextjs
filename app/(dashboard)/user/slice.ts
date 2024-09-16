@@ -3,14 +3,10 @@ import { NewUser, UpdateUserPayload, User } from "./_types/type";
 
 type UserState = {
 	users: User[]; // Array of User objects
-	isLoading: boolean;
-	error: null | string;
 };
 
 const initialState: UserState = {
 	users: [],
-	isLoading: false,
-	error: null,
 };
 
 const userSlice = createSlice({

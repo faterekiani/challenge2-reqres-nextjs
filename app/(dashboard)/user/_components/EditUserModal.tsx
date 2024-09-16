@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Pencil } from "lucide-react";
 
 import EditUserForm from "./EditUserForm";
-import Modal from "../../../../lib/_components/Modal";
+import Modal from "../../../../lib/components/Modal";
 
 type Props = {
 	userId: number;

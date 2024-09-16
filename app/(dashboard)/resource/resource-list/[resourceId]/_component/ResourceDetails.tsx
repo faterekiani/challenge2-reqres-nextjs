@@ -1,7 +1,7 @@
 "use client";
 
 import useSingleResource from "@/lib/hook/useSingleResource";
-import Spinner from "@/lib/_components/Spinner";
+import Spinner from "@/lib/components/Spinner";
 
 type Props = {
 	resourceId: number;

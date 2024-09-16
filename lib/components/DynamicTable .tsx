@@ -5,7 +5,7 @@ import {
 	ColumnDef,
 	CoreRow,
 } from "@tanstack/react-table";
-import Spinner from "@/lib/_components/Spinner";
+import Spinner from "@/lib/components/Spinner";
 
 type DynamicTableProps<T extends object> = {
 	data: T[];

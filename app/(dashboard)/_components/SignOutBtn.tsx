@@ -1,7 +1,7 @@
 import { removeCookie } from "@/lib/auth/action";
 import apiRoutes from "@/lib/constants";
-import Button from "@/lib/_components/Button";
-import Modal from "@/lib/_components/Modal";
+import Button from "@/lib/components/Button";
+import Modal from "@/lib/components/Modal";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
