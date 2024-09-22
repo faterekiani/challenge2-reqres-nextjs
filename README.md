@@ -1,6 +1,12 @@
-## Getting Started
+# Getting Started
 
-First, run the development server:
+## development workflow
+
+- clone project
+
+-`npm install`
+
+then, run the development server:
 
 ```bash
 npm run dev
