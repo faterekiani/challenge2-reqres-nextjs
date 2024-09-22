@@ -1,0 +1,75 @@
+import Link from "next/link";
+import { TUsers } from "@/app/_lib/types/types";
+import Image from "next/image";
+import DeleteUserBtn from "./DeleteUserBtn";
+import { Ellipsis } from "lucide-react";
+import EditUserBtn from "./EditUserBtn";
+import { Dispatch, SetStateAction } from "react";
+import defaultImage from "../../../../public/default.jpg";
+
+type Props = {
+  userInfo: TUsers;
+  allUserArray: TUsers[];
+  onSetAllUserArray: Dispatch<SetStateAction<TUsers[]>>;
+};
+export default function UserTableItems({
+  userInfo,
+  allUserArray,
+  onSetAllUserArray,
+}: Props) {
+  const { id: userId, avatar, first_name, last_name, email } = userInfo;
+
+  return (
+    <tr className="flex hover:bg-primary-200 py-2">
+      <td className="flex items-center justify-center w-[10%] text-sm text-gray-500 whitespace-nowrap">
+        {userId}
+      </td>
+
+      <td className="flex items-center justify-center  w-[10%] text-sm text-gray-500 whitespace-nowrap">
+        <div className="relative size-12">
+          <Image
+            src={avatar ? avatar : defaultImage}
+            alt="user avatar"
+            fill
+            className="rounded-full object-cover"
+          />
+        </div>
+      </td>
+
+      <td className="flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap">
+        {first_name}
+      </td>
+
+      <td
+        className={`flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap`}
+      >
+        {last_name}
+      </td>
+
+      <td className="flex items-center justify-center w-[20%] text-sm text-gray-500 whitespace-nowrap">
+        {email}
+      </td>
+
+      <td className="flex items-center justify-center gap-1 w-[20%] text-sm text-gray-500 whitespace-nowrap">
+        <EditUserBtn
+          userId={userId}
+          allUserArray={allUserArray}
+          onSetAllUserArray={onSetAllUserArray}
+        />
+
+        <DeleteUserBtn
+          userId={userId}
+          allUserArray={allUserArray}
+          onSetAllUserArray={onSetAllUserArray}
+        />
+
+        <Link href={`/user/user-list/${userInfo.id}`}>
+          <Ellipsis
+            size={15}
+            className="hover:text-secondary transition-colors"
+          />
+        </Link>
+      </td>
+    </tr>
+  );
+}
