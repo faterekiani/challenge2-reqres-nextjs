@@ -6,7 +6,7 @@ type Props = {
 	pageSize: number;
 };
 
-export function useResource({ pageNumber, pageSize }: Props) {
+export function useResources({ pageNumber, pageSize }: Props) {
 	const {
 		data: resourceData,
 		isLoading,

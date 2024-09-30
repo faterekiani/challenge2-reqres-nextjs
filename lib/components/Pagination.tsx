@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useUsers } from "../hook/useUser";
+import { useUsers } from "../hook/useUsers";
 
 type PaginationProps = {
 	page: number;

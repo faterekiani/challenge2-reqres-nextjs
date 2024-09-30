@@ -7,7 +7,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import Pagination from "../../../../../lib/components/Pagination";
 import { SearchParams } from "@/lib/types/types";
-import { useResource } from "@/lib/hook/useResource";
+import { useResources } from "@/lib/hook/useResources";
 import { Resource } from "../../_types/type";
 import { DynamicTable } from "@/lib/components/DynamicTable ";
 
@@ -41,7 +41,7 @@ export default function ResourcesList({ page, size }: SearchParams) {
 		[],
 	);
 
-	const { isLoading, resourceData, error } = useResource({
+	const { isLoading, resourceData, error } = useResources({
 		pageNumber: page,
 		pageSize: size,
 	});

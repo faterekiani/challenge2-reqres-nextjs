@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo } from "react";
 
-import { useUsers } from "../../../../lib/hook/useUser";
+import { useUsers } from "../../../../lib/hook/useUsers";
 import Pagination from "../../../../lib/components/Pagination";
 import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { usersData } from "../slice";
